@@ -1,0 +1,23 @@
+{
+  "name": "bfs-dfs-graph-traversal-platform",
+  "version": "1.0.0",
+  "description": "Mobile-First & PWA-ready BFS & DFS Graph Traversal Educational Platform",
+  "main": "index.html",
+  "scripts": {
+    "start": "node serve.js",
+    "dev": "node serve.js",
+    "serve:py": "python serve.py",
+    "tunnel": "npx cloudflared tunnel --url http://localhost:8080"
+  },
+  "keywords": [
+    "bfs",
+    "dfs",
+    "graph",
+    "pwa",
+    "mobile",
+    "education",
+    "dms"
+  ],
+  "author": "",
+  "license": "MIT"
+}

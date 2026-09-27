@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BFS & DFS Graph Traversal Platform | Interactive DMS Simulator</title>
+  <meta name="description" content="A state-of-the-art interactive educational computer science learning platform for Breadth First Search (BFS) and Depth First Search (DFS) graph traversal algorithms.">
+  
+  <!-- PWA & Mobile Viewport Config -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#090d16">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ==========================================
+       1. IMPRESSIVE OPENING ANIMATION OVERLAY
+       ========================================== -->
+  <div id="intro-overlay">
+    <div class="intro-canvas-container">
+      <canvas id="introCanvas"></canvas>
+    </div>
+    <div class="intro-content-box">
+      <div class="intro-badge">✨ Interactive DMS Learning Platform</div>
+      <h1 class="intro-title">BFS & DFS Graph Traversal</h1>
+      <p class="intro-subtitle">Visualize • Explore • Master</p>
+      <div class="intro-actions">
+        <button id="btn-start-learning" class="btn btn-primary btn-lg">Start Learning →</button>
+        <button id="btn-skip-intro" class="btn btn-secondary btn-sm">Skip Intro</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       2. MODERN SAAS TOP NAVIGATION HEADER
+       ========================================== -->
+  <header class="app-navbar no-print">
+    <div class="brand-container" id="brand-logo">
+      <div class="brand-icon-svg">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <circle cx="6" cy="6" r="3"/>
+          <circle cx="18" cy="6" r="3"/>
+          <circle cx="12" cy="18" r="3"/>
+          <line x1="8.5" y1="7.5" x2="15.5" y2="7.5"/>
+          <line x1="7.5" y1="8.5" x2="10.5" y2="15.5"/>
+          <line x1="16.5" y1="8.5" x2="13.5" y2="15.5"/>
+        </svg>
+      </div>
+      <div>
+        <h1 class="brand-title">BFS & DFS Visualizer</h1>
+        <div class="brand-subtitle">Discrete Mathematical Structures</div>
+      </div>
+    </div>
+
+    <!-- Modern Vector Navigation Tabs -->
+    <nav class="nav-tabs" role="tablist">
+      <button class="nav-tab active" data-target="tab-intro" role="tab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Home
+      </button>
+
+      <button class="nav-tab" data-target="tab-learn" role="tab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        Learn
+      </button>
+
+      <button class="nav-tab" data-target="tab-bfs" role="tab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+        BFS
+      </button>
+
+      <button class="nav-tab" data-target="tab-dfs" role="tab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2v8"/><path d="M6 10l6 4 6-4"/><path d="M6 14v6"/><path d="M18 14v6"/></svg>
+        DFS
+      </button>
+
+      <button class="nav-tab" data-target="tab-visualizer" role="tab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="5" r="3"/><circle cx="5" cy="19" r="3"/><circle cx="19" cy="19" r="3"/><line x1="10" y1="7" x2="7" y2="17"/><line x1="14" y1="7" x2="17" y2="17"/></svg>
+        Graph Lab
+      </button>
+
+      <button class="nav-tab" data-target="tab-experiments" role="tab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M10 2v7.5L4.5 18A2 2 0 0 0 6 21h12a2 2 0 0 0 1.5-3L14 9.5V2"/><line x1="8.5" y1="2" x2="15.5" y2="2"/></svg>
+        Experiments
+      </button>
+
+      <button class="nav-tab" data-target="tab-quiz" role="tab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Quiz
+      </button>
+
+      <button class="nav-tab" data-target="tab-progress" role="tab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+        Progress
+      </button>
+
+      <button class="nav-tab" data-target="tab-observation" role="tab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Assignment
+      </button>
+    </nav>
+
+    <!-- Theme Switcher, Mobile Network Info & Menu Button -->
+    <div class="nav-actions">
+      <button class="nav-action-btn" id="btn-network-info" title="Mobile & LAN Access Options">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+        <span class="desktop-only">Mobile Access</span>
+      </button>
+
+      <button class="theme-toggle-btn" id="theme-toggle-btn" title="Toggle Light/Dark Theme">
+        <svg id="theme-icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg id="theme-icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+
+      <button class="mobile-menu-btn" id="mobile-menu-btn" title="Open Menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Backdrop Overlay -->
+  <div class="mobile-drawer-backdrop" id="mobile-drawer-backdrop"></div>
+
+  <!-- Mobile Menu Drawer -->
+  <div class="mobile-drawer" id="mobile-drawer">
+    <div class="drawer-header">
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2.5"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="12" cy="18" r="3"/><line x1="8.5" y1="7.5" x2="15.5" y2="7.5"/></svg>
+        <strong style="font-size: 1.1rem; color: var(--text-main);">Navigation Menu</strong>
+      </div>
+      <button class="drawer-close-btn" id="btn-close-mobile-menu" title="Close Menu">✕</button>
+    </div>
+
+    <div class="drawer-links">
+      <button class="nav-tab active" data-target="tab-intro">🏠 Home Dashboard</button>
+      <button class="nav-tab" data-target="tab-learn">📚 Learn CS Concepts</button>
+      <button class="nav-tab" data-target="tab-bfs">🌊 BFS Visualizer</button>
+      <button class="nav-tab" data-target="tab-dfs">🌲 DFS Visualizer</button>
+      <button class="nav-tab" data-target="tab-visualizer">🕸️ Graph Lab</button>
+      <button class="nav-tab" data-target="tab-experiments">🧪 Experiments</button>
+      <button class="nav-tab" data-target="tab-quiz">🎯 Dynamic Quiz</button>
+      <button class="nav-tab" data-target="tab-progress">🏆 Progress Analytics</button>
+      <button class="nav-tab" data-target="tab-observation">📄 Assignment Report</button>
+    </div>
+
+    <div class="drawer-footer">
+      <button class="btn btn-secondary btn-block" id="drawer-network-btn">📱 Mobile & LAN Sharing</button>
+    </div>
+  </div>
+
+  <!-- Mobile & Public Network Access Modal -->
+  <div class="modal-overlay" id="network-modal">
+    <div class="modal-card" style="max-width: 540px;">
+      <div class="modal-header">
+        <h3 style="display: flex; align-items: center; gap: 0.5rem; margin: 0;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+          Mobile & Public Access Setup
+        </h3>
+        <button class="modal-close-btn" id="btn-close-network-modal">✕</button>
+      </div>
+
+      <div class="modal-body" style="font-size: 0.9rem; line-height: 1.5;">
+        <p>You can access this platform seamlessly on smartphones, tablets, or expose it to the public internet for remote testing.</p>
+        
+        <div class="access-box" style="background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 12px; padding: 1rem; margin-bottom: 1rem;">
+          <h4 style="color: var(--accent-cyan); margin-bottom: 0.5rem;">📱 1. Local Wi-Fi Network Access</h4>
+          <p style="margin-bottom: 0.5rem; font-size: 0.85rem;">Ensure your phone and computer are connected to the same Wi-Fi network. Open your phone browser to:</p>
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <input type="text" id="net-lan-url" class="form-control" readonly value="http://localhost:8080" style="font-family: monospace;">
+            <button class="btn btn-secondary btn-sm" id="btn-copy-lan-url">Copy</button>
+          </div>
+          <small style="color: var(--text-muted); display: block; margin-top: 0.4rem;">Replace <code>localhost</code> with your computer's LAN IP (e.g. <code>http://192.168.1.15:8080</code>).</small>
+        </div>
+
+        <div class="access-box" style="background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 12px; padding: 1rem;">
+          <h4 style="color: var(--accent-purple); margin-bottom: 0.5rem;">🌍 2. Public Internet HTTPS Access</h4>
+          <p style="margin-bottom: 0.5rem; font-size: 0.85rem;">To test on mobile over 4G/5G internet or share with external reviewers, run a secure public tunnel command in terminal:</p>
+          <div style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.4rem;">
+            <input type="text" class="form-control" readonly value="npx cloudflared tunnel --url http://localhost:8080" style="font-family: monospace; font-size: 0.8rem;">
+            <button class="btn btn-secondary btn-sm" id="btn-copy-tunnel-cmd">Copy</button>
+          </div>
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <input type="text" class="form-control" readonly value="npx localtunnel --port 8080" style="font-family: monospace; font-size: 0.8rem;">
+            <button class="btn btn-secondary btn-sm" id="btn-copy-localtunnel-cmd">Copy</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer" style="margin-top: 1rem; text-align: right;">
+        <button class="btn btn-primary" onclick="document.getElementById('network-modal').classList.remove('active')">Got it!</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Container -->
+  <main class="main-container">
+
+    <!-- ==========================================
+         SECTION 1: HERO HOME DASHBOARD
+         ========================================== -->
+    <section id="tab-intro" class="tab-content active">
+      
+      <div class="hero-banner">
+        <div class="hero-content">
+          <span class="badge badge-cyan" style="margin-bottom: 0.75rem;">2nd Year Computer Science & Engineering</span>
+          <h1 class="hero-title">BFS & DFS Graph Traversal Platform</h1>
+          <p class="hero-desc">
+            Master fundamental Discrete Mathematical Structures (DMS) graph algorithms through real-time step animations, dynamic queue/stack inspection, and interactive experiments.
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-primary btn-lg" onclick="app.navigateToTab('tab-learn')">
+              Start Learning →
+            </button>
+            <button class="btn btn-secondary btn-lg" onclick="app.navigateToTab('tab-visualizer')">
+              Explore Graph Lab 🕸️
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Feature Navigation Cards Grid -->
+      <div class="feature-cards-grid">
+        
+        <div class="feature-card" onclick="app.navigateToTab('tab-learn')">
+          <div>
+            <div class="feature-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            </div>
+            <h3 class="feature-card-title">📚 Learn Hub</h3>
+            <p class="feature-card-desc">Master core DMS definitions, graph terminology, pseudocode, and algorithm steps.</p>
+          </div>
+          <div class="feature-link">Explore Theory →</div>
+        </div>
+
+        <div class="feature-card" onclick="app.navigateToTab('tab-bfs')">
+          <div>
+            <div class="feature-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            </div>
+            <h3 class="feature-card-title">🌊 BFS Algorithm</h3>
+            <p class="feature-card-desc">Understand level-by-level exploration using First-In-First-Out (FIFO) Queue memory.</p>
+          </div>
+          <div class="feature-link">Study BFS →</div>
+        </div>
+
+        <div class="feature-card" onclick="app.navigateToTab('tab-dfs')">
+          <div>
+            <div class="feature-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v8"/><path d="M6 10l6 4 6-4"/><path d="M6 14v6"/><path d="M18 14v6"/></svg>
+            </div>
+            <h3 class="feature-card-title">🌲 DFS Algorithm</h3>
+            <p class="feature-card-desc">Understand deep branch diving, call stack recursion, and backtracking behavior.</p>
+          </div>
+          <div class="feature-link">Study DFS →</div>
+        </div>
+
+        <div class="feature-card" onclick="app.navigateToTab('tab-visualizer')">
+          <div>
+            <div class="feature-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="3"/><circle cx="5" cy="19" r="3"/><circle cx="19" cy="19" r="3"/><line x1="10" y1="7" x2="7" y2="17"/><line x1="14" y1="7" x2="17" y2="17"/></svg>
+            </div>
+            <h3 class="feature-card-title">🕸️ Graph Lab</h3>
+            <p class="feature-card-desc">Build, drag, edit custom graphs and run step-by-step pro animations with live line highlights.</p>
+          </div>
+          <div class="feature-link">Launch Canvas →</div>
+        </div>
+
+        <div class="feature-card" onclick="app.navigateToTab('tab-experiments')">
+          <div>
+            <div class="feature-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2v7.5L4.5 18A2 2 0 0 0 6 21h12a2 2 0 0 0 1.5-3L14 9.5V2"/></svg>
+            </div>
+            <h3 class="feature-card-title">🧪 Experiments</h3>
+            <p class="feature-card-desc">Perform guided lab scenarios: cycles, disconnected components, and shortest path finding.</p>
+          </div>
+          <div class="feature-link">Start Lab →</div>
+        </div>
+
+        <div class="feature-card" onclick="app.navigateToTab('tab-quiz')">
+          <div>
+            <div class="feature-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <h3 class="feature-card-title">🎯 Dynamic Quiz</h3>
+            <p class="feature-card-desc">Test your understanding with offline randomized questions, SVG graphs, and attempt history.</p>
+          </div>
+          <div class="feature-link">Take Quiz →</div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ==========================================
+         SECTION 2: LEARN HUB
+         ========================================== -->
+    <section id="tab-learn" class="tab-content">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <span class="card-title-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
+            Core DMS Graph Terminology & Theory
+          </h2>
+          <span class="badge badge-cyan">Comprehensive Learning Hub</span>
+        </div>
+
+        <div class="grid-3">
+          <div class="ds-box">
+            <h4 style="color: var(--accent-cyan); margin-bottom: 0.4rem;">1. Graph G = (V, E)</h4>
+            <p style="font-size: 0.88rem;">Non-linear mathematical structure consisting of Vertices <i>V</i> and Edges <i>E</i> connecting pairs of vertices.</p>
+          </div>
+
+          <div class="ds-box">
+            <h4 style="color: var(--accent-cyan); margin-bottom: 0.4rem;">2. Vertex (Node)</h4>
+            <p style="font-size: 0.88rem;">Fundamental point in a graph representing an entity (e.g. computer, location, state).</p>
+          </div>
+
+          <div class="ds-box">
+            <h4 style="color: var(--accent-cyan); margin-bottom: 0.4rem;">3. Edge (Arc)</h4>
+            <p style="font-size: 0.88rem;">Connection line between two vertices representing a pathway or relationship.</p>
+          </div>
+
+          <div class="ds-box">
+            <h4 style="color: var(--accent-cyan); margin-bottom: 0.4rem;">4. Directed Graph (Digraph)</h4>
+            <p style="font-size: 0.88rem;">Graph where edges have fixed orientation (<i>u</i> → <i>v</i>).</p>
+          </div>
+
+          <div class="ds-box">
+            <h4 style="color: var(--accent-cyan); margin-bottom: 0.4rem;">5. Undirected Graph</h4>
+            <p style="font-size: 0.88rem;">Graph where edges are bidirectional, so (<i>u</i>, <i>v</i>) is identical to (<i>v</i>, <i>u</i>).</p>
+          </div>
+
+          <div class="ds-box">
+            <h4 style="color: var(--accent-cyan); margin-bottom: 0.4rem;">6. Visited Set / Array</h4>
+            <p style="font-size: 0.88rem;">Boolean tracking array that prevents infinite loops in cyclic graphs.</p>
+          </div>
+        </div>
+
+        <div style="margin-top: 1.5rem;" class="card">
+          <h3 style="color: var(--accent-cyan); margin-bottom: 1rem;">Time & Space Complexity Bounds</h3>
+          <div class="grid-2">
+            <div class="ds-box">
+              <h4>Time Complexity: <i>O</i>(<i>V</i> + <i>E</i>)</h4>
+              <p style="font-size:0.88rem; margin-top:0.4rem;">Every vertex is queued/pushed once <i>O</i>(<i>V</i>) and every edge is inspected during adjacency list traversal <i>O</i>(<i>E</i>).</p>
+            </div>
+            <div class="ds-box">
+              <h4>Space Complexity: <i>O</i>(<i>V</i>)</h4>
+              <p style="font-size:0.88rem; margin-top:0.4rem;">Queue size (BFS) and call stack depth (DFS) require auxiliary memory proportional to total vertices <i>O</i>(<i>V</i>).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 3: BFS ALGORITHM
+         ========================================== -->
+    <section id="tab-bfs" class="tab-content">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <span class="card-title-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></span>
+            Breadth-First Search (BFS) Breakdown
+          </h2>
+          <span class="badge badge-cyan">Queue (FIFO) Level Order</span>
+        </div>
+
+        <div class="grid-2">
+          <div>
+            <h3 style="color: var(--accent-cyan);">BFS Algorithm Steps</h3>
+            <ol style="margin-left: 1.25rem; color: var(--text-muted); margin-top: 0.5rem; display:flex; flex-direction:column; gap:0.4rem;">
+              <li>Select starting root vertex <i>s</i>.</li>
+              <li>Mark <i>s</i> as discovered/visited.</li>
+              <li>Enqueue <i>s</i> into the Queue.</li>
+              <li>While Queue is not empty:
+                <ul style="margin-left:1.25rem; margin-top:0.3rem;">
+                  <li>Dequeue vertex <i>v</i> from FRONT of Queue.</li>
+                  <li>Add <i>v</i> to Traversal Order.</li>
+                  <li>For each unvisited neighbor <i>u</i> of <i>v</i>:
+                    <ul style="margin-left:1.25rem;">
+                      <li>Mark <i>u</i> visited.</li>
+                      <li>Enqueue <i>u</i> to REAR of Queue.</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ol>
+
+            <button class="btn btn-primary btn-sm" style="margin-top: 1rem;" onclick="app.startAlgTab('BFS')">
+              🌊 Run BFS on Visual Canvas →
+            </button>
+          </div>
+
+          <div class="ds-box" style="text-align: center;">
+            <h4 style="color: var(--accent-cyan); margin-bottom: 0.75rem;">Queue FIFO Structure</h4>
+            <p style="font-size:0.88rem;">Neighbors discovered at Level <i>k</i> are processed before moving to Level <i>k+1</i>.</p>
+            <div style="display: flex; justify-content: center; align-items: center; gap: 0.5rem; background: var(--bg-primary); padding: 1rem; border-radius: 8px; border: 1px solid var(--accent-cyan); margin-top: 1rem;">
+              <span style="font-size: 0.75rem; font-weight: bold; color: var(--accent-cyan);">FRONT (Dequeue) ➔</span>
+              <div class="ds-element ds-element-queue">A</div>
+              <div class="ds-element ds-element-queue">B</div>
+              <div class="ds-element ds-element-queue">C</div>
+              <span style="font-size: 0.75rem; font-weight: bold; color: var(--accent-cyan);">➔ REAR (Enqueue)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 4: DFS ALGORITHM
+         ========================================== -->
+    <section id="tab-dfs" class="tab-content">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <span class="card-title-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v8"/><path d="M6 10l6 4 6-4"/><path d="M6 14v6"/><path d="M18 14v6"/></svg></span>
+            Depth-First Search (DFS) Breakdown
+          </h2>
+          <span class="badge badge-purple">Stack (LIFO) / Backtracking</span>
+        </div>
+
+        <div class="grid-2">
+          <div>
+            <h3 style="color: var(--accent-purple);">DFS Algorithm Steps</h3>
+            <ol style="margin-left: 1.25rem; color: var(--text-muted); margin-top: 0.5rem; display:flex; flex-direction:column; gap:0.4rem;">
+              <li>Select starting root vertex <i>s</i>.</li>
+              <li>Mark <i>s</i> visited and add to Traversal Order.</li>
+              <li>Explore unvisited neighbor <i>u</i> deeper.</li>
+              <li>Recursively repeat along the branch until no unvisited neighbors exist.</li>
+              <li><strong>Backtrack</strong> to previous ancestor when dead end is hit.</li>
+            </ol>
+
+            <button class="btn btn-purple btn-sm" style="margin-top: 1rem;" onclick="app.startAlgTab('DFS')">
+              🌲 Run DFS on Visual Canvas →
+            </button>
+          </div>
+
+          <div class="ds-box" style="text-align: center;">
+            <h4 style="color: var(--accent-purple); margin-bottom: 0.75rem;">Stack LIFO & Backtracking</h4>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 0.4rem; background: var(--bg-primary); padding: 1rem; border-radius: 8px; border: 1px solid var(--accent-purple); max-width: 220px; margin: 0 auto;">
+              <span style="font-size: 0.75rem; font-weight: bold; color: var(--accent-purple);">TOP (Pop & Push) ⬇⬆</span>
+              <div class="ds-element ds-element-stack" style="width:100%;">Node D (Deepest)</div>
+              <div class="ds-element ds-element-stack" style="width:100%;">Node B</div>
+              <div class="ds-element ds-element-stack" style="width:100%;">Node A (Root)</div>
+              <span style="font-size: 0.75rem; font-weight: bold; color: var(--text-subtle);">BOTTOM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 5: GRAPH LAB (VISUAL CANVAS)
+         ========================================== -->
+    <section id="tab-visualizer" class="tab-content">
+      <div class="card no-padding">
+        
+        <!-- Top Visualizer Toolbar -->
+        <div class="canvas-toolbar">
+          <div class="canvas-toolbar-group">
+            <span class="badge badge-cyan" id="step-counter">Step 0 / 0</span>
+            <label class="form-label" style="margin:0;">Start Root:</label>
+            <select id="start-node-select" class="form-select" style="width: 80px; padding: 0.2rem 0.5rem;"></select>
+          </div>
+
+          <div class="canvas-toolbar-group">
+            <button id="btn-run-bfs" class="btn btn-primary btn-sm">🌊 Run BFS</button>
+            <button id="btn-run-dfs" class="btn btn-purple btn-sm">🌲 Run DFS</button>
+            <button id="btn-toggle-pseudocode" class="btn btn-secondary btn-sm">💻 Code Panel</button>
+            <button id="btn-toggle-levelview" class="btn btn-secondary btn-sm">📊 Level/Tree View</button>
+          </div>
+        </div>
+
+        <!-- Main Workspace Split Grid -->
+        <div class="visualizer-layout">
+          
+          <!-- Left Sidebar: Tools & Graph Construction -->
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            
+            <!-- Canvas Editing Modes -->
+            <div class="ds-box">
+              <div class="ds-title">Editing Tool & Mode</div>
+              <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+                <button class="btn btn-secondary btn-sm btn-mode active" data-mode="select">🖐 Drag Node</button>
+                <button class="btn btn-secondary btn-sm btn-mode" data-mode="addNode">➕ Add Node</button>
+                <button class="btn btn-secondary btn-sm btn-mode" data-mode="addEdge">🔗 Add Edge</button>
+                <button class="btn btn-secondary btn-sm btn-mode" data-mode="delete">❌ Delete</button>
+              </div>
+            </div>
+
+            <!-- Example Presets -->
+            <div class="ds-box">
+              <div class="ds-title">Load Example Graph</div>
+              <select id="preset-select" class="form-select" style="width: 100%;">
+                <option value="simple">1. Simple Connected Graph</option>
+                <option value="tree">2. Binary Hierarchy Tree</option>
+                <option value="cycle">3. Graph with Cycle</option>
+                <option value="disconnected">4. Disconnected Graph (2 Components)</option>
+                <option value="contrast">5. BFS vs DFS Contrasting Graph</option>
+              </select>
+            </div>
+
+            <!-- Graph Settings -->
+            <div class="ds-box">
+              <div class="ds-title">Graph Settings</div>
+              <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.85rem;">
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                  <input type="checkbox" id="toggle-directed"> Directed Graph (Arrows)
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                  <input type="checkbox" id="toggle-weighted"> Weighted Edges
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                  <input type="checkbox" id="toggle-stepmode"> 🎯 Step-by-Step Mode (Manual)
+                </label>
+              </div>
+            </div>
+
+            <!-- Quick Form Tools -->
+            <div class="ds-box">
+              <div class="ds-title">Graph Controls</div>
+              
+              <!-- Add Vertex Form -->
+              <div style="display: flex; gap: 0.4rem; margin-bottom: 0.6rem;">
+                <input type="text" id="input-vertex-label" class="form-control" placeholder="Label (e.g. F)" style="text-transform: uppercase;">
+                <button id="btn-add-vertex" class="btn btn-primary btn-sm">Add Node</button>
+              </div>
+
+              <!-- Add Edge Form -->
+              <div style="display: flex; gap: 0.4rem; margin-bottom: 0.6rem; align-items: center;">
+                <select id="select-edge-u" class="form-select" style="width: 70px;"></select>
+                <span>→</span>
+                <select id="select-edge-v" class="form-select" style="width: 70px;"></select>
+                <button id="btn-add-edge" class="btn btn-primary btn-sm">Connect</button>
+              </div>
+
+              <!-- Delete Edge Form -->
+              <div style="display: flex; gap: 0.4rem; margin-bottom: 0.6rem; align-items: center;">
+                <select id="select-delete-edge-u" class="form-select" style="width: 70px;"></select>
+                <span>✕</span>
+                <select id="select-delete-edge-v" class="form-select" style="width: 70px;"></select>
+                <button id="btn-delete-edge" class="btn btn-danger btn-sm">Disconnect</button>
+              </div>
+
+              <!-- Delete Vertex Form -->
+              <div style="display: flex; gap: 0.4rem; margin-bottom: 0.6rem;">
+                <select id="select-delete-vertex" class="form-select" style="flex-grow: 1;"></select>
+                <button id="btn-delete-vertex" class="btn btn-danger btn-sm">Delete Node</button>
+              </div>
+
+              <!-- Storage & Clear Actions -->
+              <button id="btn-clear-graph" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: 0.4rem;">Clear Canvas</button>
+              
+              <div style="display: flex; gap: 0.4rem; margin-top: 0.6rem;">
+                <button id="btn-save-graph" class="btn btn-secondary btn-sm" style="flex:1;">💾 Save Graph</button>
+                <button id="btn-load-graph" class="btn btn-secondary btn-sm" style="flex:1;">📂 Load Graph</button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Center: HTML5 Canvas Visualizer Workspace -->
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            <div class="canvas-wrapper">
+              <canvas id="graphCanvas"></canvas>
+              
+              <!-- State Legend Overlay -->
+              <div class="state-legend">
+                <div class="legend-item"><div class="legend-dot unvisited"></div> Unvisited</div>
+                <div class="legend-item"><div class="legend-dot current"></div> Current (Active)</div>
+                <div class="legend-item"><div class="legend-dot queued"></div> Queued / Discovered</div>
+                <div class="legend-item"><div class="legend-dot stacked"></div> Stacked (DFS)</div>
+                <div class="legend-item"><div class="legend-dot visited"></div> Visited (Complete)</div>
+                <div class="legend-item"><div class="legend-dot path"></div> Shortest Path</div>
+              </div>
+            </div>
+
+            <!-- Playback Controls Bar -->
+            <div class="playback-controls">
+              <div style="display: flex; gap: 0.4rem; align-items: center;">
+                <button id="btn-prev-step" class="btn btn-secondary btn-sm" title="Previous Step">⏮ Prev Step</button>
+                <button id="btn-play-pause" class="btn btn-primary btn-sm">▶ Play</button>
+                <button id="btn-next-step" class="btn btn-secondary btn-sm" title="Next Step">Next Step ⏭</button>
+                <button id="btn-reset-animation" class="btn btn-secondary btn-sm">↺ Reset</button>
+              </div>
+
+              <!-- Speed Controls -->
+              <div class="speed-control-group">
+                <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">Speed:</span>
+                <div class="speed-pills">
+                  <button class="speed-pill" data-speed="0.25">0.25×</button>
+                  <button class="speed-pill" data-speed="0.5">0.5×</button>
+                  <button class="speed-pill active" data-speed="1.0">1×</button>
+                  <button class="speed-pill" data-speed="1.5">1.5×</button>
+                  <button class="speed-pill" data-speed="2.0">2×</button>
+                  <button class="speed-pill" data-speed="4.0">4×</button>
+                </div>
+              </div>
+
+              <!-- Interactive Progress Scrubber -->
+              <div style="display: flex; align-items: center; gap: 0.5rem; flex-grow: 1; max-width: 250px;">
+                <input type="range" id="progress-scrubber" min="0" max="0" value="0" style="width: 100%; accent-color: var(--accent-cyan); cursor: pointer;">
+              </div>
+            </div>
+
+            <!-- Algorithm Code-Like Execution Panel (Toggleable) -->
+            <div id="pseudocode-panel" class="ds-box" style="display: none; background-color: var(--bg-primary);">
+              <div class="ds-title">
+                <span>💻 Pseudocode Execution Highlight</span>
+                <span id="pseudocode-alg-title" class="badge badge-cyan">BFS Pseudocode</span>
+              </div>
+              <div id="pseudocode-lines-container" style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 1.5; padding: 0.5rem; background: var(--bg-card); border-radius: 6px; border: 1px solid var(--border-color);">
+              </div>
+            </div>
+
+            <!-- Level View / Recursion Tree View Panel (Toggleable) -->
+            <div id="level-tree-panel" class="ds-box" style="display: none;">
+              <div class="ds-title" id="level-tree-title">BFS Level Hierarchy</div>
+              <div id="level-tree-content" style="min-height: 60px;">
+              </div>
+            </div>
+
+            <!-- Live Event Timeline -->
+            <div class="ds-box">
+              <div class="ds-title">Algorithm Event Timeline</div>
+              <div id="timeline-container" class="timeline-scroll-container">
+                <div class="timeline-empty-msg">No algorithm active. Click "Run BFS" or "Run DFS" to populate event timeline.</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Right Sidebar: Data Structures & Live Step Log -->
+          <div class="ds-container">
+            
+            <!-- Live Step Explanation Card -->
+            <div class="explanation-panel">
+              <div class="explanation-header">💡 Live Step Explanation</div>
+              <div id="explanation-text" class="explanation-text">
+                Select an algorithm (BFS or DFS) above and click Run to visualize step-by-step execution.
+              </div>
+            </div>
+
+            <!-- Data Structure Monitor (Queue/Stack) -->
+            <div class="ds-box">
+              <div class="ds-title" id="ds-queue-stack-title">Data Structure State</div>
+              <div class="ds-visualization-strip" id="ds-queue-stack-strip">
+                <span style="color:var(--text-subtle);">Empty</span>
+              </div>
+            </div>
+
+            <!-- Visited Set Monitor -->
+            <div class="ds-box">
+              <div class="ds-title">Visited / Discovered Set</div>
+              <div class="ds-visualization-strip" id="ds-visited-strip">
+                <span style="color:var(--text-subtle);">Empty</span>
+              </div>
+            </div>
+
+            <!-- Dynamic Adjacency List Monitor -->
+            <div class="ds-box">
+              <div class="ds-title">Adjacency List</div>
+              <div id="adjacency-list-display"></div>
+            </div>
+
+            <!-- Dynamic Traversal Order Monitor -->
+            <div class="ds-box">
+              <div class="ds-title">Traversal Order Sequence</div>
+              <div id="ds-traversal-order" style="min-height: 36px; font-weight: 700; color: var(--accent-cyan); display: flex; align-items: center;">
+                <span style="color:var(--text-subtle);">None</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 6: INTERACTIVE EXPERIMENTS
+         ========================================== -->
+    <section id="tab-experiments" class="tab-content">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <span class="card-title-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2v7.5L4.5 18A2 2 0 0 0 6 21h12a2 2 0 0 0 1.5-3L14 9.5V2"/></svg></span>
+            Interactive Laboratory Experiments
+          </h2>
+          <span class="badge badge-cyan">Guided Exploration Activities</span>
+        </div>
+
+        <p>Select an experiment activity below to explore fundamental DMS graph traversal behaviors:</p>
+
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+          <button class="btn btn-secondary btn-sm" onclick="app.experiments.loadExperiment(1)">Exp 1: BFS vs DFS Comparison</button>
+          <button class="btn btn-secondary btn-sm" onclick="app.experiments.loadExperiment(2)">Exp 2: Change Start Node</button>
+          <button class="btn btn-secondary btn-sm" onclick="app.experiments.loadExperiment(3)">Exp 3: Add Edge</button>
+          <button class="btn btn-secondary btn-sm" onclick="app.experiments.loadExperiment(4)">Exp 4: Remove Edge</button>
+          <button class="btn btn-secondary btn-sm" onclick="app.experiments.loadExperiment(5)">Exp 5: Disconnected Components</button>
+          <button class="btn btn-secondary btn-sm" onclick="app.experiments.loadExperiment(6)">Exp 6: Cycle Detection</button>
+          <button class="btn btn-secondary btn-sm" onclick="app.experiments.loadExperiment(7)">Exp 7: Shortest Path Finder</button>
+        </div>
+
+        <div id="experiment-output">
+          <div class="card" style="background-color: var(--bg-card); text-align: center; padding: 2rem;">
+            <p>Click any experiment button above to begin guided activity!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 7: DYNAMIC OFFLINE QUIZ SYSTEM
+         ========================================== -->
+    <section id="tab-quiz" class="tab-content">
+      <div id="quiz-container"></div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 8: STUDENT PROGRESS DASHBOARD
+         ========================================== -->
+    <section id="tab-progress" class="tab-content">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <span class="card-title-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg></span>
+            Student Progress & Analytics Dashboard
+          </h2>
+          <span class="badge badge-purple">Real-Time Tracked</span>
+        </div>
+
+        <div class="progress-grid">
+          <div class="stat-card">
+            <div class="stat-icon-circle" style="background:rgba(6,182,212,0.15); color:var(--accent-cyan);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            </div>
+            <div>
+              <div class="stat-value" id="prog-val-topics">0 / 6</div>
+              <div class="stat-label">Topics Explored</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon-circle" style="background:rgba(139,92,246,0.15); color:var(--accent-purple);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="3"/><circle cx="5" cy="19" r="3"/><circle cx="19" cy="19" r="3"/><line x1="10" y1="7" x2="7" y2="17"/><line x1="14" y1="7" x2="17" y2="17"/></svg>
+            </div>
+            <div>
+              <div class="stat-value" id="prog-val-runs">0</div>
+              <div class="stat-label">Graph Traversals Run</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon-circle" style="background:rgba(16,185,129,0.15); color:var(--accent-green);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <div>
+              <div class="stat-value" id="prog-val-quizzes">0</div>
+              <div class="stat-label">Quizzes Completed</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon-circle" style="background:rgba(245,158,11,0.15); color:var(--accent-amber);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <div>
+              <div class="stat-value" id="prog-val-accuracy">0%</div>
+              <div class="stat-label">Avg Quiz Accuracy</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ds-box" style="margin-top: 1.5rem;">
+          <h4 style="color:var(--accent-cyan); margin-bottom: 0.5rem;">Overall Course Mastery Progress</h4>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="overall-progress-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <!-- Badges Unlocked Section -->
+        <div style="margin-top: 1.5rem;">
+          <h3 style="font-size: 1.1rem; color:var(--text-main); margin-bottom: 0.8rem;">🏆 Achievements & Badges Unlocked</h3>
+          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;" id="badges-container">
+            <span class="badge badge-cyan">🌱 DMS Novice</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 9: PRINTABLE OBSERVATION SHEET
+         ========================================== -->
+    <section id="tab-observation" class="tab-content">
+      <div class="no-print" style="margin-bottom: 1rem; display: flex; justify-content: flex-end;">
+        <button id="btn-print-observation" class="btn btn-primary btn-lg">
+          🖨️ Print / Save Assignment Report (PDF)
+        </button>
+      </div>
+
+      <div id="observation-sheet" class="printable-sheet">
+        <div style="text-align: center; border-bottom: 2px solid #000; padding-bottom: 1rem; margin-bottom: 1.5rem;">
+          <h1 style="font-size: 1.8rem; text-transform: uppercase;">Department of Computer Science & Engineering</h1>
+          <h2>Discrete Mathematical Structures (DMS) Laboratory</h2>
+          <h3 style="margin-top: 0.5rem;">Observation / Assignment Summary</h3>
+        </div>
+
+        <p><strong>Student Name:</strong> ___________________________________ &nbsp;&nbsp;&nbsp;&nbsp; <strong>Roll No / USN:</strong> ____________________</p>
+        <p><strong>Date:</strong> ________________________ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>Semester / Branch:</strong> CSE 2nd Year</p>
+
+        <h3 style="margin-top: 1.5rem;">Title:</h3>
+        <p>BFS & DFS Graph Traversal Algorithm Analysis and Interactive Visualization</p>
+
+        <h3>Aim:</h3>
+        <p>To understand, trace, and visualize Breadth-First Search (BFS) and Depth-First Search (DFS) graph traversal algorithms using an interactive computational visualization framework.</p>
+
+        <h3>Observation Table:</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Exp #</th>
+              <th>Graph Type</th>
+              <th>Start Root</th>
+              <th>BFS Traversal Order</th>
+              <th>DFS Traversal Order</th>
+              <th>Remarks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Simple Connected Graph</td>
+              <td>A</td>
+              <td id="obs-row1-bfs">A → B → C → D → E</td>
+              <td id="obs-row1-dfs">A → B → D → E → C</td>
+              <td>BFS is level-wise; DFS dives deep</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Binary Tree Graph</td>
+              <td>A</td>
+              <td>A → B → C → D → E → F → G</td>
+              <td>A → B → D → E → C → F → G</td>
+              <td>DFS produces preorder traversal</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Graph with Cycle</td>
+              <td>A</td>
+              <td>A → B → E → C → D</td>
+              <td>A → B → C → D → E</td>
+              <td>Visited set prevents infinite loop</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Disconnected Graph</td>
+              <td>A</td>
+              <td>A → B → C</td>
+              <td>A → B → C</td>
+              <td>Only Component 1 reachable</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 style="margin-top: 1.5rem;">Result:</h3>
+        <p style="font-weight: bold; font-size: 1.05rem;">
+          Thus, Breadth-First Search (BFS) and Depth-First Search (DFS) graph traversal algorithms were studied, traced, and visually verified successfully.
+        </p>
+
+        <div style="margin-top: 3rem; display: flex; justify-content: space-between;">
+          <p>____________________<br>Student Signature</p>
+          <p>____________________<br>Faculty / Evaluator Signature</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Toast Notification Floating Container -->
+  <div id="toast-container"></div>
+
+  <!-- JavaScript Modules -->
+  <script src="js/graph.js"></script>
+  <script src="js/algorithms.js"></script>
+  <script src="js/visualizer.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/experiments.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
