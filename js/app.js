@@ -563,6 +563,28 @@ class App {
       });
     }
 
+    // Random Graph Button
+    const btnRandom = document.getElementById('btn-random-graph');
+    if (btnRandom) {
+      btnRandom.addEventListener('click', () => {
+        const width = this.visualizer ? this.visualizer.canvas.width : 700;
+        const height = this.visualizer ? this.visualizer.canvas.height : 450;
+        this.graph.generateRandomGraph(6, width, height);
+        this.resetAnimation();
+        this.onGraphModified();
+        this.showToast("Generated random graph", 'success');
+      });
+    }
+
+    // Instructions Modal Button
+    const btnInstructions = document.getElementById('btn-show-instructions');
+    if (btnInstructions) {
+      btnInstructions.addEventListener('click', () => {
+        const modal = document.getElementById('instructions-modal');
+        if (modal) modal.classList.add('active');
+      });
+    }
+
     // Clear Graph Button
     const btnClear = document.getElementById('btn-clear-graph');
     if (btnClear) {

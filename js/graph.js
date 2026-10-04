@@ -202,4 +202,51 @@ class Graph {
         this.loadPreset('simple', width, height);
     }
   }
+
+  generateRandomGraph(numNodes = 6, width = 700, height = 400) {
+    this.clear();
+    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const padding = 60;
+    const availableW = width - padding * 2;
+    const availableH = height - padding * 2;
+
+    const positions = [];
+    for (let i = 0; i < numNodes; i++) {
+      const label = alphabet[i];
+      let x, y, tooClose;
+      let attempts = 0;
+      do {
+        tooClose = false;
+        x = padding + Math.random() * availableW;
+        y = padding + Math.random() * availableH;
+        for (const pos of positions) {
+          const dist = Math.hypot(pos.x - x, pos.y - y);
+          if (dist < 80) {
+            tooClose = true;
+            break;
+          }
+        }
+        attempts++;
+      } while (tooClose && attempts < 50);
+
+      positions.push({ x, y });
+      this.addNode(label, label, x, y);
+    }
+
+    const nodeIds = positions.map((_, i) => alphabet[i]);
+    // Create random edges ensures connected or semi-connected
+    for (let i = 0; i < nodeIds.length - 1; i++) {
+      this.addEdge(nodeIds[i], nodeIds[i + 1]);
+    }
+
+    // Add extra random edges
+    const extraEdges = Math.floor(numNodes * 0.7);
+    for (let i = 0; i < extraEdges; i++) {
+      const u = nodeIds[Math.floor(Math.random() * nodeIds.length)];
+      const v = nodeIds[Math.floor(Math.random() * nodeIds.length)];
+      if (u !== v) {
+        this.addEdge(u, v);
+      }
+    }
+  }
 }

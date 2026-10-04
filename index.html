@@ -112,10 +112,10 @@
 
     <!-- Theme Switcher, Mobile Network Info & Menu Button -->
     <div class="nav-actions">
-      <button class="nav-action-btn" id="btn-network-info" title="Mobile & LAN Access Options">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
-        <span class="desktop-only">Mobile Access</span>
-      </button>
+
+
+
+
 
       <button class="theme-toggle-btn" id="theme-toggle-btn" title="Toggle Light/Dark Theme">
         <svg id="theme-icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -197,6 +197,31 @@
       </div>
       <div class="modal-footer" style="margin-top: 1rem; text-align: right;">
         <button class="btn btn-primary" onclick="document.getElementById('network-modal').classList.remove('active')">Got it!</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Instructions & First-Time User Guide Modal -->
+  <div class="modal-overlay" id="instructions-modal">
+    <div class="modal-card" style="max-width: 580px;">
+      <div class="modal-header">
+        <h3 style="display: flex; align-items: center; gap: 0.5rem; margin: 0; color: var(--accent-cyan);">
+          ❓ First-Time User Guide: How to Use Graph Lab
+        </h3>
+        <button class="modal-close-btn" onclick="document.getElementById('instructions-modal').classList.remove('active')">✕</button>
+      </div>
+      <div class="modal-body" style="font-size: 0.9rem; line-height: 1.6;">
+        <ol style="margin-left: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem;">
+          <li><strong>Creating Nodes:</strong> Select <code>➕ Add Node</code> tool and click on the canvas, or type a node label in the form and click <strong>Add Node</strong>.</li>
+          <li><strong>Creating Edges:</strong> Select <code>🔗 Add Edge</code> tool, click the starting node, then click the target node. Or use the <strong>Connect</strong> form on the left panel.</li>
+          <li><strong>Dragging & Moving:</strong> Select <code>🖐 Drag Node</code> mode and click and drag any node on the canvas.</li>
+          <li><strong>Deleting Nodes & Edges:</strong> Use <code>❌ Delete</code> mode or the <strong>Delete Node / Disconnect</strong> forms.</li>
+          <li><strong>Running BFS & DFS:</strong> Pick a start root node, then click 🌊 <strong>Run BFS</strong> or 🌲 <strong>Run DFS</strong>. Use playback controls (▶ Play, ⏸ Pause, Next Step, Prev Step) to trace execution!</li>
+          <li><strong>Random & Preset Graphs:</strong> Click 🎲 <strong>Random Graph</strong> or select from <strong>Load Example Graph</strong> dropdown.</li>
+        </ol>
+      </div>
+      <div class="modal-footer" style="margin-top: 1rem; text-align: right;">
+        <button class="btn btn-primary" onclick="document.getElementById('instructions-modal').classList.remove('active')">Got it, Let's Start!</button>
       </div>
     </div>
   </div>
@@ -358,6 +383,75 @@
             </div>
           </div>
         </div>
+
+        <!-- BFS vs DFS Comparison Table -->
+        <div style="margin-top: 1.5rem;" class="card">
+          <h3 style="color: var(--accent-cyan); margin-bottom: 1rem;">BFS vs DFS Algorithm Comparison</h3>
+          <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+              <thead>
+                <tr style="background: var(--bg-primary); border-bottom: 2px solid var(--border-color);">
+                  <th style="padding: 0.6rem; text-align: left;">Feature</th>
+                  <th style="padding: 0.6rem; text-align: left; color: var(--accent-cyan);">Breadth-First Search (BFS)</th>
+                  <th style="padding: 0.6rem; text-align: left; color: var(--accent-purple);">Depth-First Search (DFS)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 0.6rem; font-weight: bold;">Data Structure</td>
+                  <td style="padding: 0.6rem;">Queue (FIFO - First In First Out)</td>
+                  <td style="padding: 0.6rem;">Stack (LIFO - Last In First Out) / Recursion</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 0.6rem; font-weight: bold;">Exploration Order</td>
+                  <td style="padding: 0.6rem;">Level-by-level (radiates outwards)</td>
+                  <td style="padding: 0.6rem;">Deep dive along a path until dead end, then backtracks</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 0.6rem; font-weight: bold;">Shortest Path</td>
+                  <td style="padding: 0.6rem;">Guarantees shortest path in unweighted graphs</td>
+                  <td style="padding: 0.6rem;">Does NOT guarantee shortest path</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 0.6rem; font-weight: bold;">Memory / Space</td>
+                  <td style="padding: 0.6rem;">Higher memory if graph is wide O(V)</td>
+                  <td style="padding: 0.6rem;">Lower memory if graph is narrow O(h)</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 0.6rem; font-weight: bold;">Time Complexity</td>
+                  <td style="padding: 0.6rem;">O(V + E)</td>
+                  <td style="padding: 0.6rem;">O(V + E)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Real-World Applications -->
+        <div style="margin-top: 1.5rem;" class="card">
+          <h3 style="color: var(--accent-cyan); margin-bottom: 1rem;">🌍 Real-World Applications</h3>
+          <div class="grid-2">
+            <div class="ds-box">
+              <h4 style="color: var(--accent-cyan);">BFS Applications</h4>
+              <ul style="margin-left: 1.2rem; font-size: 0.88rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.3rem;">
+                <li>Social Networking (Finding degrees of separation e.g. LinkedIn / Facebook)</li>
+                <li>GPS Navigation & Shortest Path Routing (Unweighted distance)</li>
+                <li>Web Crawling (Indexing pages level by level)</li>
+                <li>Peer-to-Peer Networks (BitTorrent neighbor discovery)</li>
+              </ul>
+            </div>
+            <div class="ds-box">
+              <h4 style="color: var(--accent-purple);">DFS Applications</h4>
+              <ul style="margin-left: 1.2rem; font-size: 0.88rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.3rem;">
+                <li>Topological Sorting (Build systems, task scheduling)</li>
+                <li>Solving Mazes & Puzzles (N-Queens, Sudoku solver)</li>
+                <li>Cycle Detection in Graphs (Deadlock detection in OS)</li>
+                <li>Pathfinding in Game AI & Decision Trees</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -557,13 +651,18 @@
                 <button id="btn-delete-vertex" class="btn btn-danger btn-sm">Delete Node</button>
               </div>
 
-              <!-- Storage & Clear Actions -->
-              <button id="btn-clear-graph" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: 0.4rem;">Clear Canvas</button>
+              <!-- Storage, Random & Clear Actions -->
+              <div style="display: flex; gap: 0.4rem; margin-top: 0.4rem;">
+                <button id="btn-random-graph" class="btn btn-secondary btn-sm" style="flex:1;">🎲 Random Graph</button>
+                <button id="btn-clear-graph" class="btn btn-secondary btn-sm" style="flex:1;">🗑️ Clear Canvas</button>
+              </div>
               
               <div style="display: flex; gap: 0.4rem; margin-top: 0.6rem;">
                 <button id="btn-save-graph" class="btn btn-secondary btn-sm" style="flex:1;">💾 Save Graph</button>
                 <button id="btn-load-graph" class="btn btn-secondary btn-sm" style="flex:1;">📂 Load Graph</button>
               </div>
+
+              <button id="btn-show-instructions" class="btn btn-primary btn-sm" style="width: 100%; margin-top: 0.6rem;">❓ How to Use & Guide</button>
             </div>
 
           </div>
