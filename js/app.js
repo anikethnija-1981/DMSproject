@@ -16,8 +16,7 @@ class App {
     this.isPlaying = false;
     this.playTimer = null;
     this.speed = 1000;
-    this.speedMultiplier = 1.0;
-    this.isStepMode = false;
+    this.isStepMode = true;
     this.activeAlgorithm = 'BFS';
     this.startNodeId = 'A';
 
@@ -791,11 +790,7 @@ class App {
     this.currentStepIndex = 0;
     this.renderCurrentStep();
 
-    this.showToast(`Started ${algType} traversal from node ${startNode}`, 'success');
-
-    if (!this.isStepMode) {
-      this.play();
-    }
+    this.showToast(`Prepared ${algType} traversal from node ${startNode}. Click Play or Next Step to begin.`, 'info');
   }
 
   play() {
