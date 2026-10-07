@@ -200,8 +200,32 @@ function initTryit() {
     </button>
   `).join('');
 
-  // Load first challenge by default
-  loadTryitChallenge(0);
+  // Randomize initial challenge without repeating
+  let usedQuestions = [];
+  try {
+    usedQuestions = JSON.parse(sessionStorage.getItem('dms_tryit_used')) || [];
+  } catch (e) {}
+
+  if (usedQuestions.length >= tryitChallenges.length) {
+    usedQuestions = [];
+  }
+
+  let availableIndices = [];
+  for (let i = 0; i < tryitChallenges.length; i++) {
+    if (!usedQuestions.includes(i)) {
+      availableIndices.push(i);
+    }
+  }
+
+  const randomIdx = availableIndices[Math.floor(Math.random() * availableIndices.length)];
+  usedQuestions.push(randomIdx);
+
+  try {
+    sessionStorage.setItem('dms_tryit_used', JSON.stringify(usedQuestions));
+  } catch (e) {}
+
+  // Load the randomly selected challenge by default
+  loadTryitChallenge(randomIdx);
 }
 
 function loadTryitChallenge(idx) {
