@@ -954,7 +954,11 @@ class App {
     const activeEl = document.getElementById(`timeline-step-${this.currentStepIndex}`);
     if (activeEl) {
       activeEl.classList.add('active');
-      activeEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      const container = document.getElementById('timeline-container');
+      if (container) {
+        const itemTop = activeEl.offsetTop - container.offsetTop;
+//         container.scrollTop = itemTop - (container.clientHeight / 2) + (activeEl.clientHeight / 2);
+      }
     }
   }
 
@@ -1193,12 +1197,8 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const targetId = this.getAttribute('href').slice(1);
       const target = document.getElementById(targetId);
-      if (target) {
-        // Navigate to DMS Guide tab first
-        if (window.app) window.app.navigateToTab('tab-dmsguide');
-        setTimeout(() => {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 100);
+      if (target && window.app) {
+        window.app.navigateToTab('tab-dmsguide');
       }
     });
   });
