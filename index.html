@@ -108,6 +108,11 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
         Assignment
       </button>
+
+      <button class="nav-tab" data-target="tab-dmsguide" role="tab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        DMS Guide
+      </button>
     </nav>
 
     <!-- Theme Switcher, Mobile Network Info & Menu Button -->
@@ -151,6 +156,7 @@
       <button class="nav-tab" data-target="tab-quiz">🎯 Dynamic Quiz</button>
       <button class="nav-tab" data-target="tab-progress">🏆 Progress Analytics</button>
       <button class="nav-tab" data-target="tab-observation">📄 Assignment Report</button>
+      <button class="nav-tab" data-target="tab-dmsguide">📖 DMS Guide</button>
     </div>
 
     <div class="drawer-footer">
@@ -319,6 +325,17 @@
             <p class="feature-card-desc">Test your understanding with offline randomized questions, SVG graphs, and attempt history.</p>
           </div>
           <div class="feature-link">Take Quiz →</div>
+        </div>
+
+        <div class="feature-card" onclick="app.navigateToTab('tab-dmsguide')">
+          <div>
+            <div class="feature-icon-box" style="background: rgba(139,92,246,0.15); border-color: rgba(139,92,246,0.3); color: var(--accent-purple);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            </div>
+            <h3 class="feature-card-title">📖 DMS Guide</h3>
+            <p class="feature-card-desc">Complete assignment guide with worked examples, exercises, try-it-yourself activities, checklist &amp; references.</p>
+          </div>
+          <div class="feature-link" style="color: var(--accent-purple);">Open Guide →</div>
         </div>
 
       </div>
@@ -844,7 +861,7 @@
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
             </div>
             <div>
-              <div class="stat-value" id="prog-val-topics">0 / 6</div>
+              <div class="stat-value" id="prog-val-topics">0 / 9</div>
               <div class="stat-label">Topics Explored</div>
             </div>
           </div>
@@ -983,10 +1000,1009 @@
       </div>
     </section>
 
+    <!-- ==========================================
+         SECTION 10: COMPREHENSIVE DMS GUIDE
+         ========================================== -->
+    <section id="tab-dmsguide" class="tab-content">
+
+      <!-- ---- DMS INTRODUCTION ---- -->
+      <div class="card dmsguide-hero-card">
+        <div class="dmsguide-intro-bg"></div>
+        <div style="position: relative; z-index: 2;">
+          <span class="badge badge-purple" style="margin-bottom: 0.75rem;">📖 Complete DMS Assignment Guide</span>
+          <h2 style="font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, #f8fafc, #8b5cf6, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.75rem;">Discrete Mathematical Structures</h2>
+          <h3 style="color: var(--accent-cyan); font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Graph Traversal Algorithms — BFS &amp; DFS</h3>
+          <p style="max-width: 780px; font-size: 1rem; line-height: 1.75;">This comprehensive guide covers everything you need for your DMS assignment on graph traversal. It includes formal definitions, pseudocode, worked step-by-step examples, algorithm comparison, textbook-style activities, practice exercises, a try-it-yourself checklist, and curated academic references.</p>
+          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.25rem;">
+            <a href="#dmsguide-sec-defs" class="btn btn-purple btn-sm">📚 Definitions</a>
+            <a href="#dmsguide-sec-bfs" class="btn btn-primary btn-sm">🌊 BFS Theory</a>
+            <a href="#dmsguide-sec-dfs" class="btn btn-secondary btn-sm">🌲 DFS Theory</a>
+            <a href="#dmsguide-sec-examples" class="btn btn-secondary btn-sm">✏️ Worked Examples</a>
+            <a href="#dmsguide-sec-compare" class="btn btn-secondary btn-sm">⚖️ Comparison</a>
+            <a href="#dmsguide-sec-activities" class="btn btn-secondary btn-sm">🎯 Activities</a>
+            <a href="#dmsguide-sec-exercises" class="btn btn-secondary btn-sm">📝 Exercises</a>
+            <a href="#dmsguide-sec-tryit" class="btn btn-secondary btn-sm">🔬 Try-It-Yourself</a>
+            <a href="#dmsguide-sec-checklist" class="btn btn-secondary btn-sm">✅ Checklist</a>
+            <a href="#dmsguide-sec-refs" class="btn btn-secondary btn-sm">📖 References</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---- 1. GRAPH DEFINITIONS ---- -->
+      <div class="card" id="dmsguide-sec-defs">
+        <div class="card-header">
+          <h2 class="card-title">
+            <span class="card-title-icon">📚</span>
+            1. Graph Theory — Core Definitions
+          </h2>
+          <span class="badge badge-purple">DMS Foundation</span>
+        </div>
+
+        <p>In Discrete Mathematical Structures (DMS), a <strong>graph</strong> is a fundamental non-linear data structure used to represent relationships between objects. Graphs underpin many real-world systems including social networks, routing algorithms, compiler design, and AI decision trees.</p>
+
+        <div class="grid-3">
+          <div class="dmsguide-def-card">
+            <div class="dmsguide-def-icon" style="background: rgba(6,182,212,0.15); color: var(--accent-cyan);">G</div>
+            <h4 style="color: var(--accent-cyan);">Graph G = (V, E)</h4>
+            <p style="font-size: 0.88rem;">A mathematical structure with a finite set of <strong>Vertices V</strong> (nodes) and a set of <strong>Edges E</strong> connecting pairs of vertices. Formally: <em>G = (V, E)</em> where <em>E ⊆ V × V</em>.</p>
+          </div>
+          <div class="dmsguide-def-card">
+            <div class="dmsguide-def-icon" style="background: rgba(139,92,246,0.15); color: var(--accent-purple);">V</div>
+            <h4 style="color: var(--accent-purple);">Vertex (Node)</h4>
+            <p style="font-size: 0.88rem;">A fundamental point/entity in the graph. Represented as a circle in diagrams. The set of all vertices is denoted <em>V</em>. Example: Cities in a map, users in a social network.</p>
+          </div>
+          <div class="dmsguide-def-card">
+            <div class="dmsguide-def-icon" style="background: rgba(16,185,129,0.15); color: var(--accent-green);">E</div>
+            <h4 style="color: var(--accent-green);">Edge (Arc)</h4>
+            <p style="font-size: 0.88rem;">A connection between two vertices. An edge <em>(u, v)</em> connects vertex <em>u</em> to vertex <em>v</em>. May be directed (one-way) or undirected (bidirectional).</p>
+          </div>
+          <div class="dmsguide-def-card">
+            <div class="dmsguide-def-icon" style="background: rgba(245,158,11,0.15); color: var(--accent-amber);">→</div>
+            <h4 style="color: var(--accent-amber);">Directed Graph (Digraph)</h4>
+            <p style="font-size: 0.88rem;">A graph where every edge has a specific direction. Edge <em>(u → v)</em> ≠ Edge <em>(v → u)</em>. Used for one-way relationships like web links, task dependencies.</p>
+          </div>
+          <div class="dmsguide-def-card">
+            <div class="dmsguide-def-icon" style="background: rgba(244,63,94,0.15); color: var(--accent-rose);">↔</div>
+            <h4 style="color: var(--accent-rose);">Undirected Graph</h4>
+            <p style="font-size: 0.88rem;">A graph where edges are bidirectional. Edge <em>{u, v}</em> = Edge <em>{v, u}</em>. Models mutual relationships like friendships, roads between cities.</p>
+          </div>
+          <div class="dmsguide-def-card">
+            <div class="dmsguide-def-icon" style="background: rgba(6,182,212,0.15); color: var(--accent-cyan);">✓</div>
+            <h4 style="color: var(--accent-cyan);">Visited Set / Array</h4>
+            <p style="font-size: 0.88rem;">A boolean tracking structure that marks vertices as visited to prevent revisiting them. Critical for preventing infinite loops in cyclic graphs.</p>
+          </div>
+          <div class="dmsguide-def-card">
+            <div class="dmsguide-def-icon" style="background: rgba(139,92,246,0.15); color: var(--accent-purple);">~</div>
+            <h4 style="color: var(--accent-purple);">Adjacency List</h4>
+            <p style="font-size: 0.88rem;">A representation where each vertex stores a list of its neighboring vertices. Space: <em>O(V + E)</em>. Most efficient for sparse graphs and traversal algorithms.</p>
+          </div>
+          <div class="dmsguide-def-card">
+            <div class="dmsguide-def-icon" style="background: rgba(16,185,129,0.15); color: var(--accent-green);">[]</div>
+            <h4 style="color: var(--accent-green);">Adjacency Matrix</h4>
+            <p style="font-size: 0.88rem;">A 2D matrix <em>M[u][v] = 1</em> if edge exists, else <em>0</em>. Space: <em>O(V²)</em>. Best for dense graphs where fast edge lookups are needed.</p>
+          </div>
+          <div class="dmsguide-def-card">
+            <div class="dmsguide-def-icon" style="background: rgba(245,158,11,0.15); color: var(--accent-amber);">∘</div>
+            <h4 style="color: var(--accent-amber);">Path &amp; Cycle</h4>
+            <p style="font-size: 0.88rem;">A <strong>path</strong> is a sequence of vertices where consecutive vertices are connected by edges. A <strong>cycle</strong> is a path where the first and last vertex are the same.</p>
+          </div>
+        </div>
+
+        <div class="dmsguide-callout dmsguide-callout-cyan" style="margin-top: 1.5rem;">
+          <div class="dmsguide-callout-icon">💡</div>
+          <div>
+            <strong>Key Insight:</strong> Graphs model real-world networks. BFS and DFS are the two fundamental strategies to systematically visit every vertex in a graph exactly once, and they form the backbone of countless higher-level graph algorithms.
+          </div>
+        </div>
+      </div>
+
+      <!-- ---- 2. BFS THEORY ---- -->
+      <div class="card" id="dmsguide-sec-bfs">
+        <div class="card-header">
+          <h2 class="card-title">
+            <span class="card-title-icon" style="color: var(--accent-cyan);">🌊</span>
+            2. Breadth-First Search (BFS) — Theory
+          </h2>
+          <span class="badge badge-cyan">Queue · FIFO · Level Order</span>
+        </div>
+
+        <div class="grid-2">
+          <div>
+            <h3 style="color: var(--accent-cyan); margin-bottom: 0.75rem;">What is BFS?</h3>
+            <p>BFS is a graph traversal algorithm that explores vertices <strong>level by level</strong> — starting from a source vertex and visiting all vertices at the current depth before moving on to the next depth level. It was first published by Konrad Zuse in 1945 and later popularized by Edward F. Moore in 1959 for finding shortest paths.</p>
+            <p>BFS uses a <strong>Queue (FIFO)</strong> data structure to keep track of vertices to visit next. The algorithm guarantees that when a vertex is first discovered, it is reached via the shortest possible path (minimum number of edges) from the source.</p>
+
+            <h3 style="color: var(--accent-cyan); margin-bottom: 0.75rem; margin-top: 1rem;">BFS Formal Algorithm</h3>
+            <div class="dmsguide-pseudocode">
+              <div class="dmsguide-pseudo-title">BFS(Graph G, start vertex s)</div>
+<pre>1.  Mark all vertices as UNVISITED
+2.  Mark vertex s as VISITED
+3.  Enqueue s into Queue Q
+4.  WHILE Q is not empty:
+5.      u ← Dequeue from FRONT of Q
+6.      Output/Process u
+7.      FOR each neighbor v of u in Adj[u]:
+8.          IF v is UNVISITED:
+9.              Mark v as VISITED
+10.             Enqueue v to REAR of Q
+11. END WHILE</pre>
+            </div>
+          </div>
+          <div>
+            <h3 style="color: var(--accent-cyan); margin-bottom: 0.75rem;">BFS Key Properties</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <div class="dmsguide-property-row">
+                <span class="dmsguide-property-label" style="background: rgba(6,182,212,0.15); color: var(--accent-cyan);">Data Structure</span>
+                <span>Queue (FIFO — First In, First Out)</span>
+              </div>
+              <div class="dmsguide-property-row">
+                <span class="dmsguide-property-label" style="background: rgba(6,182,212,0.15); color: var(--accent-cyan);">Traversal Order</span>
+                <span>Level-by-level, radiating outward from source</span>
+              </div>
+              <div class="dmsguide-property-row">
+                <span class="dmsguide-property-label" style="background: rgba(6,182,212,0.15); color: var(--accent-cyan);">Shortest Path</span>
+                <span>✅ Guarantees shortest path in unweighted graphs</span>
+              </div>
+              <div class="dmsguide-property-row">
+                <span class="dmsguide-property-label" style="background: rgba(6,182,212,0.15); color: var(--accent-cyan);">Time Complexity</span>
+                <span><em>O(V + E)</em> — each vertex &amp; edge processed once</span>
+              </div>
+              <div class="dmsguide-property-row">
+                <span class="dmsguide-property-label" style="background: rgba(6,182,212,0.15); color: var(--accent-cyan);">Space Complexity</span>
+                <span><em>O(V)</em> — Queue stores at most all vertices</span>
+              </div>
+              <div class="dmsguide-property-row">
+                <span class="dmsguide-property-label" style="background: rgba(6,182,212,0.15); color: var(--accent-cyan);">Completeness</span>
+                <span>Complete — finds all reachable vertices</span>
+              </div>
+            </div>
+
+            <h3 style="color: var(--accent-cyan); margin-top: 1.25rem; margin-bottom: 0.75rem;">Real-World Applications</h3>
+            <ul class="dmsguide-app-list">
+              <li>🗺️ <strong>GPS Navigation</strong> — Shortest route in unweighted road networks</li>
+              <li>👥 <strong>Social Networks</strong> — Degrees of separation (LinkedIn, Facebook)</li>
+              <li>🌐 <strong>Web Crawling</strong> — Indexing pages level by level</li>
+              <li>📡 <strong>P2P Networks</strong> — BitTorrent neighbor discovery</li>
+              <li>🎮 <strong>Game AI</strong> — Finding nearest items/enemies in grid maps</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="dmsguide-callout dmsguide-callout-cyan" style="margin-top: 1.5rem;">
+          <div class="dmsguide-callout-icon">🌊</div>
+          <div><strong>Visual Analogy:</strong> Think of BFS like dropping a stone in water — ripples expand outward in concentric circles, visiting all vertices at distance 1, then distance 2, and so on. The Queue ensures we finish each "ring" before expanding further.</div>
+        </div>
+
+        <div style="margin-top: 1rem; text-align: center;">
+          <button class="btn btn-primary" onclick="app.navigateToTab('tab-bfs')">
+            🌊 View Interactive BFS Visualizer →
+          </button>
+        </div>
+      </div>
+
+      <!-- ---- 3. DFS THEORY ---- -->
+      <div class="card" id="dmsguide-sec-dfs">
+        <div class="card-header">
+          <h2 class="card-title">
+            <span class="card-title-icon" style="color: var(--accent-purple);">🌲</span>
+            3. Depth-First Search (DFS) — Theory
+          </h2>
+          <span class="badge badge-purple">Stack · LIFO · Backtracking</span>
+        </div>
+
+        <div class="grid-2">
+          <div>
+            <h3 style="color: var(--accent-purple); margin-bottom: 0.75rem;">What is DFS?</h3>
+            <p>DFS is a graph traversal algorithm that explores as <strong>deep as possible</strong> along each branch before backtracking. It picks one path and follows it to its end, then retreats to find unexplored branches. DFS was formally described by Charles Pierre Trémaux in the 19th century for solving mazes.</p>
+            <p>DFS uses a <strong>Stack (LIFO)</strong> data structure — either explicitly or via the program's call stack using recursion. DFS is the basis of many powerful algorithms including topological sort, strongly connected components (Tarjan's / Kosaraju's), and cycle detection.</p>
+
+            <h3 style="color: var(--accent-purple); margin-bottom: 0.75rem; margin-top: 1rem;">DFS Formal Algorithm (Iterative)</h3>
+            <div class="dmsguide-pseudocode" style="border-color: var(--accent-purple);">
+              <div class="dmsguide-pseudo-title" style="color: var(--accent-purple);">DFS(Graph G, start vertex s) — Iterative</div>
+<pre>1.  Mark all vertices as UNVISITED
+2.  Push s onto Stack S
+3.  WHILE S is not empty:
+4.      u ← Pop from TOP of S
+5.      IF u is UNVISITED:
+6.          Mark u as VISITED
+7.          Output/Process u
+8.          FOR each neighbor v of u in Adj[u]:
+9.              IF v is UNVISITED:
+10.                 Push v onto S
+11. END WHILE</pre>
+            </div>
+
+            <h3 style="color: var(--accent-purple); margin-bottom: 0.75rem; margin-top: 1rem;">DFS Recursive Algorithm</h3>
+            <div class="dmsguide-pseudocode" style="border-color: var(--accent-purple);">
+              <div class="dmsguide-pseudo-title" style="color: var(--accent-purple);">DFS_Recursive(Graph G, vertex u, visited[])</div>
+<pre>1.  Mark u as VISITED
+2.  Output/Process u
+3.  FOR each neighbor v of u in Adj[u]:
+4.      IF v is UNVISITED:
+5.          DFS_Recursive(G, v, visited)
+// Call DFS_Recursive(G, s, visited) to start</pre>
+            </div>
+          </div>
+          <div>
+            <h3 style="color: var(--accent-purple); margin-bottom: 0.75rem;">DFS Key Properties</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <div class="dmsguide-property-row">
+                <span class="dmsguide-property-label" style="background: rgba(139,92,246,0.15); color: var(--accent-purple);">Data Structure</span>
+                <span>Stack (LIFO) or Recursion Call Stack</span>
+              </div>
+              <div class="dmsguide-property-row">
+                <span class="dmsguide-property-label" style="background: rgba(139,92,246,0.15); color: var(--accent-purple);">Traversal Order</span>
+                <span>Deep-dive along one path, then backtrack</span>
+              </div>
+              <div class="dmsguide-property-row">
+                <span class="dmsguide-property-label" style="background: rgba(139,92,246,0.15); color: var(--accent-purple);">Shortest Path</span>
+                <span>❌ Does NOT guarantee shortest path</span>
+              </div>
+              <div class="dmsguide-property-row">
+                <span class="dmsguide-property-label" style="background: rgba(139,92,246,0.15); color: var(--accent-purple);">Time Complexity</span>
+                <span><em>O(V + E)</em> — same as BFS</span>
+              </div>
+              <div class="dmsguide-property-row">
+                <span class="dmsguide-property-label" style="background: rgba(139,92,246,0.15); color: var(--accent-purple);">Space Complexity</span>
+                <span><em>O(h)</em> where h = max depth of recursion tree</span>
+              </div>
+              <div class="dmsguide-property-row">
+                <span class="dmsguide-property-label" style="background: rgba(139,92,246,0.15); color: var(--accent-purple);">Backtracking</span>
+                <span>✅ Naturally supports backtracking</span>
+              </div>
+            </div>
+
+            <h3 style="color: var(--accent-purple); margin-top: 1.25rem; margin-bottom: 0.75rem;">Real-World Applications</h3>
+            <ul class="dmsguide-app-list">
+              <li>📋 <strong>Topological Sort</strong> — Build systems, task scheduling (DAGs)</li>
+              <li>🔍 <strong>Cycle Detection</strong> — Deadlock detection in OS scheduling</li>
+              <li>🧩 <strong>Puzzles &amp; Mazes</strong> — N-Queens, Sudoku, maze solving</li>
+              <li>🌳 <strong>Spanning Trees</strong> — Finding DFS trees of a graph</li>
+              <li>🤖 <strong>Game AI</strong> — Decision trees, game state exploration</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="dmsguide-callout" style="background: rgba(139,92,246,0.08); border-color: var(--accent-purple); margin-top: 1.5rem;">
+          <div class="dmsguide-callout-icon" style="color: var(--accent-purple);">🌲</div>
+          <div><strong>Visual Analogy:</strong> Think of DFS like solving a maze — you go as far as possible in one direction. When you hit a dead end, you backtrack to the last junction and try a different path. The Stack (or recursion) remembers your path for backtracking.</div>
+        </div>
+
+        <div style="margin-top: 1rem; text-align: center;">
+          <button class="btn btn-purple" onclick="app.navigateToTab('tab-dfs')">
+            🌲 View Interactive DFS Visualizer →
+          </button>
+        </div>
+      </div>
+
+      <!-- ---- 4. WORKED EXAMPLES ---- -->
+      <div class="card" id="dmsguide-sec-examples">
+        <div class="card-header">
+          <h2 class="card-title">
+            <span class="card-title-icon">✏️</span>
+            4. Worked Step-by-Step Examples
+          </h2>
+          <span class="badge badge-amber">Textbook Style</span>
+        </div>
+
+        <!-- Example 1: BFS on simple graph -->
+        <div class="dmsguide-example-block">
+          <div class="dmsguide-example-header">
+            <span class="dmsguide-example-num">Example 1</span>
+            <span style="color: var(--accent-cyan); font-weight: 700;">BFS on an Undirected Graph — Starting from Vertex A</span>
+          </div>
+
+          <div class="grid-2">
+            <div>
+              <h4 style="margin-bottom: 0.5rem;">Graph G:</h4>
+              <div class="dmsguide-graph-display">
+                <svg viewBox="0 0 320 200" style="width: 100%; max-width: 320px; height: 200px;" role="img" aria-label="Example graph with vertices A B C D E">
+                  <!-- Edges -->
+                  <line x1="80" y1="60" x2="160" y2="60" stroke="#06b6d4" stroke-width="2"/>
+                  <line x1="80" y1="60" x2="80" y2="140" stroke="#06b6d4" stroke-width="2"/>
+                  <line x1="160" y1="60" x2="240" y2="60" stroke="#06b6d4" stroke-width="2"/>
+                  <line x1="160" y1="60" x2="160" y2="140" stroke="#06b6d4" stroke-width="2"/>
+                  <line x1="80" y1="140" x2="160" y2="140" stroke="#06b6d4" stroke-width="2"/>
+                  <!-- Nodes -->
+                  <circle cx="80" cy="60" r="20" fill="#1e293b" stroke="#06b6d4" stroke-width="2.5"/>
+                  <text x="80" y="65" text-anchor="middle" fill="white" font-size="14" font-weight="bold">A</text>
+                  <circle cx="160" cy="60" r="20" fill="#1e293b" stroke="#06b6d4" stroke-width="2.5"/>
+                  <text x="160" y="65" text-anchor="middle" fill="white" font-size="14" font-weight="bold">B</text>
+                  <circle cx="240" cy="60" r="20" fill="#1e293b" stroke="#06b6d4" stroke-width="2.5"/>
+                  <text x="240" y="65" text-anchor="middle" fill="white" font-size="14" font-weight="bold">C</text>
+                  <circle cx="80" cy="140" r="20" fill="#1e293b" stroke="#06b6d4" stroke-width="2.5"/>
+                  <text x="80" y="145" text-anchor="middle" fill="white" font-size="14" font-weight="bold">D</text>
+                  <circle cx="160" cy="140" r="20" fill="#1e293b" stroke="#06b6d4" stroke-width="2.5"/>
+                  <text x="160" y="145" text-anchor="middle" fill="white" font-size="14" font-weight="bold">E</text>
+                </svg>
+                <p style="font-size: 0.82rem; margin-top: 0.5rem; color: var(--text-subtle); text-align: center;">
+                  V = {A, B, C, D, E} &nbsp;|&nbsp; Edges: A-B, A-D, B-C, B-E, D-E
+                </p>
+              </div>
+            </div>
+            <div>
+              <h4 style="margin-bottom: 0.75rem; color: var(--accent-cyan);">BFS Step-by-Step Trace:</h4>
+              <div class="dmsguide-steps-table">
+                <div class="dmsguide-step-row dmsguide-step-header">
+                  <span>Step</span><span>Action</span><span>Queue State</span><span>Visited</span>
+                </div>
+                <div class="dmsguide-step-row">
+                  <span>0</span><span>Start at A, enqueue A</span><span>[A]</span><span>{A}</span>
+                </div>
+                <div class="dmsguide-step-row">
+                  <span>1</span><span>Dequeue A, visit A; enqueue B, D</span><span>[B, D]</span><span>{A}</span>
+                </div>
+                <div class="dmsguide-step-row">
+                  <span>2</span><span>Dequeue B; enqueue C, E</span><span>[D, C, E]</span><span>{A, B}</span>
+                </div>
+                <div class="dmsguide-step-row">
+                  <span>3</span><span>Dequeue D; E already queued</span><span>[C, E]</span><span>{A, B, D}</span>
+                </div>
+                <div class="dmsguide-step-row">
+                  <span>4</span><span>Dequeue C; no new neighbors</span><span>[E]</span><span>{A, B, D, C}</span>
+                </div>
+                <div class="dmsguide-step-row" style="background: rgba(6,182,212,0.1);">
+                  <span>5</span><span>Dequeue E; Queue empty</span><span>[]</span><span>{A, B, D, C, E}</span>
+                </div>
+              </div>
+              <div class="dmsguide-result-box dmsguide-result-cyan">
+                <strong>BFS Traversal Order:</strong> A → B → D → C → E
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Example 2: DFS on same graph -->
+        <div class="dmsguide-example-block" style="margin-top: 1.5rem;">
+          <div class="dmsguide-example-header" style="background: rgba(139,92,246,0.08); border-color: var(--accent-purple);">
+            <span class="dmsguide-example-num" style="background: var(--accent-purple);">Example 2</span>
+            <span style="color: var(--accent-purple); font-weight: 700;">DFS on the SAME Graph — Starting from Vertex A</span>
+          </div>
+
+          <div class="grid-2">
+            <div>
+              <h4 style="margin-bottom: 0.5rem; color: var(--accent-purple);">Same Graph G (as above)</h4>
+              <p style="font-size: 0.88rem;">V = {A, B, C, D, E} &nbsp;|&nbsp; Same edges as Example 1. Notice how DFS produces a completely different traversal order!</p>
+              <div class="dmsguide-callout" style="background: rgba(139,92,246,0.08); border-color: var(--accent-purple); margin-top: 1rem;">
+                <div class="dmsguide-callout-icon" style="color: var(--accent-purple);">⚡</div>
+                <div style="font-size: 0.88rem;"><strong>Note:</strong> The order in which neighbors are added to the stack depends on the adjacency list representation. Here we assume neighbors are ordered alphabetically.</div>
+              </div>
+            </div>
+            <div>
+              <h4 style="margin-bottom: 0.75rem; color: var(--accent-purple);">DFS Step-by-Step Trace (Iterative):</h4>
+              <div class="dmsguide-steps-table">
+                <div class="dmsguide-step-row dmsguide-step-header" style="background: rgba(139,92,246,0.15);">
+                  <span>Step</span><span>Action</span><span>Stack State</span><span>Visited</span>
+                </div>
+                <div class="dmsguide-step-row">
+                  <span>0</span><span>Push A onto Stack</span><span>[A]</span><span>{}</span>
+                </div>
+                <div class="dmsguide-step-row">
+                  <span>1</span><span>Pop A; visit A; push D, B</span><span>[D, B]</span><span>{A}</span>
+                </div>
+                <div class="dmsguide-step-row">
+                  <span>2</span><span>Pop B; visit B; push E, C</span><span>[D, E, C]</span><span>{A, B}</span>
+                </div>
+                <div class="dmsguide-step-row">
+                  <span>3</span><span>Pop C; visit C; no new neighbors</span><span>[D, E]</span><span>{A, B, C}</span>
+                </div>
+                <div class="dmsguide-step-row">
+                  <span>4</span><span>Pop E; visit E; D already stacked</span><span>[D]</span><span>{A, B, C, E}</span>
+                </div>
+                <div class="dmsguide-step-row" style="background: rgba(139,92,246,0.1);">
+                  <span>5</span><span>Pop D; visit D; Stack empty</span><span>[]</span><span>{A, B, C, E, D}</span>
+                </div>
+              </div>
+              <div class="dmsguide-result-box dmsguide-result-purple">
+                <strong>DFS Traversal Order:</strong> A → B → C → E → D
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Example 3: BFS with levels -->
+        <div class="dmsguide-example-block" style="margin-top: 1.5rem;">
+          <div class="dmsguide-example-header">
+            <span class="dmsguide-example-num">Example 3</span>
+            <span style="color: var(--accent-cyan); font-weight: 700;">BFS — Level-by-Level Decomposition on a Tree Graph</span>
+          </div>
+          <p style="margin-bottom: 1rem;">Consider a binary tree graph with root A and children B, C. B has children D, E; C has children F, G.</p>
+          <div class="dmsguide-level-display">
+            <div class="dmsguide-level-row">
+              <span class="dmsguide-level-badge" style="background: rgba(6,182,212,0.15); border-color: var(--accent-cyan); color: var(--accent-cyan);">Level 0</span>
+              <div class="dmsguide-level-nodes">
+                <span class="dmsguide-node-pill" style="background: rgba(6,182,212,0.2);">A</span>
+              </div>
+            </div>
+            <div class="dmsguide-level-row">
+              <span class="dmsguide-level-badge" style="background: rgba(6,182,212,0.1); border-color: rgba(6,182,212,0.5); color: var(--accent-cyan);">Level 1</span>
+              <div class="dmsguide-level-nodes">
+                <span class="dmsguide-node-pill">B</span>
+                <span class="dmsguide-node-pill">C</span>
+              </div>
+            </div>
+            <div class="dmsguide-level-row">
+              <span class="dmsguide-level-badge" style="background: rgba(6,182,212,0.05); border-color: rgba(6,182,212,0.3); color: var(--accent-cyan);">Level 2</span>
+              <div class="dmsguide-level-nodes">
+                <span class="dmsguide-node-pill">D</span>
+                <span class="dmsguide-node-pill">E</span>
+                <span class="dmsguide-node-pill">F</span>
+                <span class="dmsguide-node-pill">G</span>
+              </div>
+            </div>
+          </div>
+          <div class="dmsguide-result-box dmsguide-result-cyan">
+            <strong>BFS Traversal Order:</strong> A → B → C → D → E → F → G &nbsp;(Level-order / Breadth-first)
+          </div>
+        </div>
+      </div>
+
+      <!-- ---- 5. BFS vs DFS COMPARISON ---- -->
+      <div class="card" id="dmsguide-sec-compare">
+        <div class="card-header">
+          <h2 class="card-title">
+            <span class="card-title-icon">⚖️</span>
+            5. BFS vs DFS — Comprehensive Comparison
+          </h2>
+          <span class="badge badge-green">Algorithm Analysis</span>
+        </div>
+
+        <p>Understanding when to use BFS versus DFS is a critical skill in algorithm design. Both have identical time complexity but differ significantly in memory usage, traversal behavior, and suitability for different problem types.</p>
+
+        <div style="overflow-x: auto; margin-top: 1rem;">
+          <table class="dmsguide-compare-table">
+            <thead>
+              <tr>
+                <th>Feature / Property</th>
+                <th style="color: var(--accent-cyan);">🌊 BFS (Breadth-First Search)</th>
+                <th style="color: var(--accent-purple);">🌲 DFS (Depth-First Search)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Data Structure</strong></td>
+                <td>Queue (FIFO)</td>
+                <td>Stack (LIFO) / Recursion</td>
+              </tr>
+              <tr>
+                <td><strong>Traversal Pattern</strong></td>
+                <td>Level-by-level (horizontal expansion)</td>
+                <td>Deep dive along path (vertical, then backtrack)</td>
+              </tr>
+              <tr>
+                <td><strong>Shortest Path</strong></td>
+                <td>✅ Guaranteed (unweighted graphs)</td>
+                <td>❌ Not guaranteed</td>
+              </tr>
+              <tr>
+                <td><strong>Time Complexity</strong></td>
+                <td><em>O(V + E)</em></td>
+                <td><em>O(V + E)</em></td>
+              </tr>
+              <tr>
+                <td><strong>Space Complexity</strong></td>
+                <td><em>O(V)</em> — can be large for wide graphs</td>
+                <td><em>O(h)</em> — height of recursion tree</td>
+              </tr>
+              <tr>
+                <td><strong>Memory Usage</strong></td>
+                <td>Higher for bushy/wide graphs</td>
+                <td>Lower for narrow/deep graphs</td>
+              </tr>
+              <tr>
+                <td><strong>Completeness</strong></td>
+                <td>Always finds solution if reachable</td>
+                <td>May get trapped in deep/infinite paths</td>
+              </tr>
+              <tr>
+                <td><strong>Cycle Handling</strong></td>
+                <td>Handles via visited set</td>
+                <td>Handles via visited set</td>
+              </tr>
+              <tr>
+                <td><strong>Best Use Cases</strong></td>
+                <td>Shortest path, level-order, web crawling</td>
+                <td>Cycle detection, topological sort, mazes</td>
+              </tr>
+              <tr>
+                <td><strong>Implementation</strong></td>
+                <td>Typically iterative (queue-based)</td>
+                <td>Recursive or iterative (stack-based)</td>
+              </tr>
+              <tr>
+                <td><strong>Output on Tree</strong></td>
+                <td>Level-order traversal</td>
+                <td>Pre-order / Post-order / In-order</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="dmsguide-callout dmsguide-callout-green" style="margin-top: 1.5rem;">
+          <div class="dmsguide-callout-icon" style="color: var(--accent-green);">⚖️</div>
+          <div><strong>When to Choose:</strong> Use <span style="color: var(--accent-cyan); font-weight: 700;">BFS</span> when you need the shortest path or level-order processing. Use <span style="color: var(--accent-purple); font-weight: 700;">DFS</span> when memory is limited, you need backtracking, or you're working on topological ordering, cycle detection, or exhaustive path search.</div>
+        </div>
+      </div>
+
+      <!-- ---- 6. ACTIVITIES ---- -->
+      <div class="card" id="dmsguide-sec-activities">
+        <div class="card-header">
+          <h2 class="card-title">
+            <span class="card-title-icon">🎯</span>
+            6. Textbook-Style Activities
+          </h2>
+          <span class="badge badge-amber">Guided Practice</span>
+        </div>
+
+        <p>These activities guide you step-by-step through the most important concepts tested in DMS graph traversal assignments. Complete them in order for the best learning outcome.</p>
+
+        <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+
+          <div class="dmsguide-activity-card">
+            <div class="dmsguide-activity-header">
+              <span class="dmsguide-activity-num">Activity 1</span>
+              <span class="dmsguide-activity-title">Tracing BFS on a Given Graph</span>
+              <span class="badge badge-cyan">Beginner</span>
+            </div>
+            <div class="dmsguide-activity-body">
+              <p><strong>Objective:</strong> Manually trace the BFS algorithm on a given undirected graph and record the traversal order and queue states.</p>
+              <p><strong>Given Graph:</strong> V = {1, 2, 3, 4, 5, 6} with edges: (1,2), (1,3), (2,4), (2,5), (3,6)</p>
+              <p><strong>Task:</strong></p>
+              <ol style="margin-left: 1.25rem; display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.9rem;">
+                <li>Draw the adjacency list for this graph.</li>
+                <li>Apply BFS starting from vertex 1.</li>
+                <li>Record the Queue state after each step.</li>
+                <li>Write the BFS traversal order.</li>
+                <li>Identify the BFS tree edges.</li>
+              </ol>
+              <div class="dmsguide-activity-answer" id="act1-answer">
+                <button class="btn btn-secondary btn-sm" onclick="document.getElementById('act1-sol').style.display = document.getElementById('act1-sol').style.display === 'none' ? 'block' : 'none';">💡 Reveal Solution</button>
+                <div id="act1-sol" style="display: none; margin-top: 0.75rem;">
+                  <strong>BFS Order:</strong> 1 → 2 → 3 → 4 → 5 → 6<br>
+                  <strong>Queue trace:</strong> [1] → [2,3] → [3,4,5] → [4,5,6] → [5,6] → [6] → []
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dmsguide-activity-card">
+            <div class="dmsguide-activity-header">
+              <span class="dmsguide-activity-num">Activity 2</span>
+              <span class="dmsguide-activity-title">Tracing DFS on the Same Graph</span>
+              <span class="badge badge-cyan">Beginner</span>
+            </div>
+            <div class="dmsguide-activity-body">
+              <p><strong>Objective:</strong> Apply DFS on the same graph from Activity 1 and compare the traversal with BFS.</p>
+              <p><strong>Task:</strong></p>
+              <ol style="margin-left: 1.25rem; display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.9rem;">
+                <li>Apply DFS (recursive) starting from vertex 1 on the same graph.</li>
+                <li>Record the call stack depth at each step.</li>
+                <li>Write the DFS traversal order.</li>
+                <li>Identify DFS tree edges and back edges.</li>
+                <li>Compare with BFS result: which vertices were visited in different order?</li>
+              </ol>
+              <div class="dmsguide-activity-answer">
+                <button class="btn btn-secondary btn-sm" onclick="document.getElementById('act2-sol').style.display = document.getElementById('act2-sol').style.display === 'none' ? 'block' : 'none';">💡 Reveal Solution</button>
+                <div id="act2-sol" style="display: none; margin-top: 0.75rem;">
+                  <strong>DFS Order (recursive, alphabetical neighbors):</strong> 1 → 2 → 4 → 5 → 3 → 6<br>
+                  <strong>Comparison:</strong> BFS visits 3 before 4 and 5; DFS dives into 2's subtree (4, 5) before visiting 3.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dmsguide-activity-card">
+            <div class="dmsguide-activity-header">
+              <span class="dmsguide-activity-num">Activity 3</span>
+              <span class="dmsguide-activity-title">Disconnected Graph Traversal</span>
+              <span class="badge badge-amber">Intermediate</span>
+            </div>
+            <div class="dmsguide-activity-body">
+              <p><strong>Objective:</strong> Apply BFS and DFS to a disconnected graph and understand how to handle multiple components.</p>
+              <p><strong>Given Graph:</strong> Component 1: Vertices {A, B, C} with edges (A,B), (B,C). Component 2: Vertices {D, E} with edge (D,E).</p>
+              <p><strong>Task:</strong></p>
+              <ol style="margin-left: 1.25rem; display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.9rem;">
+                <li>Run BFS starting from A. Which vertices are visited?</li>
+                <li>Run BFS starting from D. Which vertices are visited?</li>
+                <li>Modify BFS to visit ALL vertices in a disconnected graph.</li>
+                <li>How many connected components does this graph have?</li>
+              </ol>
+              <div class="dmsguide-activity-answer">
+                <button class="btn btn-secondary btn-sm" onclick="document.getElementById('act3-sol').style.display = document.getElementById('act3-sol').style.display === 'none' ? 'block' : 'none';">💡 Reveal Solution</button>
+                <div id="act3-sol" style="display: none; margin-top: 0.75rem;">
+                  <strong>BFS from A:</strong> Visits A, B, C only (Component 1).<br>
+                  <strong>BFS from D:</strong> Visits D, E only (Component 2).<br>
+                  <strong>Complete traversal:</strong> Run BFS/DFS from each unvisited vertex after each traversal completes.<br>
+                  <strong>Components:</strong> 2 connected components.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dmsguide-activity-card">
+            <div class="dmsguide-activity-header">
+              <span class="dmsguide-activity-num">Activity 4</span>
+              <span class="dmsguide-activity-title">Cycle Detection Using DFS</span>
+              <span class="badge badge-purple">Intermediate</span>
+            </div>
+            <div class="dmsguide-activity-body">
+              <p><strong>Objective:</strong> Use DFS to detect whether a graph contains a cycle.</p>
+              <p><strong>Given Graph:</strong> V = {A, B, C, D} with edges (A,B), (B,C), (C,D), (D,B) — note edge D,B creates a cycle.</p>
+              <p><strong>Task:</strong></p>
+              <ol style="margin-left: 1.25rem; display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.9rem;">
+                <li>Run DFS from vertex A.</li>
+                <li>Track the recursion stack ("currently being processed" set).</li>
+                <li>When does the algorithm detect a cycle?</li>
+                <li>Which edge creates the back edge (cycle edge)?</li>
+              </ol>
+              <div class="dmsguide-activity-answer">
+                <button class="btn btn-secondary btn-sm" onclick="document.getElementById('act4-sol').style.display = document.getElementById('act4-sol').style.display === 'none' ? 'block' : 'none';">💡 Reveal Solution</button>
+                <div id="act4-sol" style="display: none; margin-top: 0.75rem;">
+                  <strong>Cycle Detected:</strong> When DFS visits D and finds neighbor B which is still in the recursion stack (currently being processed), a back edge (D→B) is found, indicating a cycle B→C→D→B.
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ---- 7. EXERCISES ---- -->
+      <div class="card" id="dmsguide-sec-exercises">
+        <div class="card-header">
+          <h2 class="card-title">
+            <span class="card-title-icon">📝</span>
+            7. Practice Exercises
+          </h2>
+          <span class="badge badge-rose">Self-Assessment</span>
+        </div>
+
+        <p>Complete these exercises independently to test your understanding. Show all work in your Assignment Book, including graph diagrams, step traces, queue/stack states, and final traversal orders.</p>
+
+        <div class="grid-2">
+          <div class="dmsguide-exercise-card">
+            <div class="dmsguide-ex-header">
+              <span class="dmsguide-ex-num">Q1</span>
+              <span class="badge badge-cyan" style="font-size: 0.7rem;">BFS</span>
+            </div>
+            <p style="margin-top: 0.75rem; font-size: 0.9rem;">Given graph G with vertices {P, Q, R, S, T} and edges (P,Q), (P,R), (Q,S), (Q,T), (R,T):</p>
+            <ol style="margin-left: 1.25rem; font-size: 0.88rem; display: flex; flex-direction: column; gap: 0.3rem;">
+              <li>Draw the adjacency list.</li>
+              <li>Perform BFS from vertex P.</li>
+              <li>Record Queue and Visited set at each step.</li>
+              <li>What is the BFS traversal order?</li>
+            </ol>
+          </div>
+
+          <div class="dmsguide-exercise-card">
+            <div class="dmsguide-ex-header">
+              <span class="dmsguide-ex-num">Q2</span>
+              <span class="badge badge-purple" style="font-size: 0.7rem;">DFS</span>
+            </div>
+            <p style="margin-top: 0.75rem; font-size: 0.9rem;">Using the same graph G from Q1:</p>
+            <ol style="margin-left: 1.25rem; font-size: 0.88rem; display: flex; flex-direction: column; gap: 0.3rem;">
+              <li>Perform DFS from vertex P (recursive).</li>
+              <li>Write the DFS traversal order.</li>
+              <li>Draw the DFS tree.</li>
+              <li>Identify all tree edges and back edges.</li>
+            </ol>
+          </div>
+
+          <div class="dmsguide-exercise-card">
+            <div class="dmsguide-ex-header">
+              <span class="dmsguide-ex-num">Q3</span>
+              <span class="badge badge-green" style="font-size: 0.7rem;">Complexity</span>
+            </div>
+            <p style="margin-top: 0.75rem; font-size: 0.9rem;">For a graph with 7 vertices and 10 edges (adjacency list representation):</p>
+            <ol style="margin-left: 1.25rem; font-size: 0.88rem; display: flex; flex-direction: column; gap: 0.3rem;">
+              <li>What is the time complexity of BFS?</li>
+              <li>What is the time complexity of DFS?</li>
+              <li>What is the space complexity of each?</li>
+              <li>Calculate exact values for V=7, E=10.</li>
+            </ol>
+          </div>
+
+          <div class="dmsguide-exercise-card">
+            <div class="dmsguide-ex-header">
+              <span class="dmsguide-ex-num">Q4</span>
+              <span class="badge badge-amber" style="font-size: 0.7rem;">Analysis</span>
+            </div>
+            <p style="margin-top: 0.75rem; font-size: 0.9rem;">Explain with an example:</p>
+            <ol style="margin-left: 1.25rem; font-size: 0.88rem; display: flex; flex-direction: column; gap: 0.3rem;">
+              <li>Why does BFS guarantee shortest path but DFS does not?</li>
+              <li>Give a specific graph G and start node where BFS and DFS produce identical traversal order.</li>
+              <li>Give a specific graph where they differ maximally.</li>
+            </ol>
+          </div>
+
+          <div class="dmsguide-exercise-card">
+            <div class="dmsguide-ex-header">
+              <span class="dmsguide-ex-num">Q5</span>
+              <span class="badge badge-rose" style="font-size: 0.7rem;">Advanced</span>
+            </div>
+            <p style="margin-top: 0.75rem; font-size: 0.9rem;">Given a directed graph (digraph) with vertices {A,B,C,D,E} and directed edges A→B, A→C, B→D, C→D, D→E:</p>
+            <ol style="margin-left: 1.25rem; font-size: 0.88rem; display: flex; flex-direction: column; gap: 0.3rem;">
+              <li>Perform BFS and DFS from A.</li>
+              <li>Check if this digraph has any cycles.</li>
+              <li>Perform a topological sort using DFS.</li>
+              <li>What does topological sort represent?</li>
+            </ol>
+          </div>
+
+          <div class="dmsguide-exercise-card">
+            <div class="dmsguide-ex-header">
+              <span class="dmsguide-ex-num">Q6</span>
+              <span class="badge badge-cyan" style="font-size: 0.7rem;">Application</span>
+            </div>
+            <p style="margin-top: 0.75rem; font-size: 0.9rem;">Real-world application problem:</p>
+            <ol style="margin-left: 1.25rem; font-size: 0.88rem; display: flex; flex-direction: column; gap: 0.3rem;">
+              <li>A social network has 6 people (A–F) with known connections. Model it as a graph.</li>
+              <li>Find the degrees of separation between A and F using BFS.</li>
+              <li>Find all people reachable from A within 2 hops.</li>
+              <li>Which algorithm (BFS/DFS) is better for this problem and why?</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---- 8. TRY-IT-YOURSELF ---- -->
+      <div class="card" id="dmsguide-sec-tryit">
+        <div class="card-header">
+          <h2 class="card-title">
+            <span class="card-title-icon">🔬</span>
+            8. Try-It-Yourself — Interactive Exploration
+          </h2>
+          <span class="badge badge-green">Hands-On Lab</span>
+        </div>
+
+        <p>Use the interactive tools on this platform to explore BFS and DFS behavior. Follow the guided steps below and record your observations in your Assignment Book.</p>
+
+        <div class="grid-2">
+          <div class="dmsguide-tryit-card">
+            <div class="dmsguide-tryit-header">
+              <span style="font-size: 1.5rem;">🌊</span>
+              <div>
+                <h4 style="color: var(--accent-cyan); margin-bottom: 0.25rem;">BFS Exploration Tasks</h4>
+                <span class="badge badge-cyan" style="font-size: 0.7rem;">Graph Lab</span>
+              </div>
+            </div>
+            <ul class="dmsguide-tryit-list">
+              <li>
+                <span class="dmsguide-tryit-step">1</span>
+                <div>Navigate to <strong>Graph Lab</strong> tab. Load the <em>Simple Connected Graph</em> preset. Run BFS from node A. <em>Record traversal order.</em></div>
+              </li>
+              <li>
+                <span class="dmsguide-tryit-step">2</span>
+                <div>Change the start node to B and re-run BFS. <em>Compare with previous result — does the order change?</em></div>
+              </li>
+              <li>
+                <span class="dmsguide-tryit-step">3</span>
+                <div>Load the <em>Binary Hierarchy Tree</em> preset. Run BFS. Verify it produces level-order (A, B, C, D, E, F, G).</div>
+              </li>
+              <li>
+                <span class="dmsguide-tryit-step">4</span>
+                <div>Load the <em>Graph with Cycle</em> preset. Run BFS. Confirm the visited set prevents infinite loops.</div>
+              </li>
+              <li>
+                <span class="dmsguide-tryit-step">5</span>
+                <div>Create your own custom graph. Add 5 nodes (A–E) and 6 edges. Run BFS and record the traversal.</div>
+              </li>
+            </ul>
+            <div style="margin-top: 1rem;">
+              <button class="btn btn-primary btn-sm" onclick="app.navigateToTab('tab-visualizer')">
+                🚀 Open Graph Lab → Run BFS
+              </button>
+            </div>
+          </div>
+
+          <div class="dmsguide-tryit-card">
+            <div class="dmsguide-tryit-header">
+              <span style="font-size: 1.5rem;">🌲</span>
+              <div>
+                <h4 style="color: var(--accent-purple); margin-bottom: 0.25rem;">DFS Exploration Tasks</h4>
+                <span class="badge badge-purple" style="font-size: 0.7rem;">Graph Lab</span>
+              </div>
+            </div>
+            <ul class="dmsguide-tryit-list">
+              <li>
+                <span class="dmsguide-tryit-step" style="background: var(--accent-purple);">1</span>
+                <div>Load the <em>Simple Connected Graph</em> preset. Run DFS from node A. <em>Record traversal order &amp; compare with BFS result.</em></div>
+              </li>
+              <li>
+                <span class="dmsguide-tryit-step" style="background: var(--accent-purple);">2</span>
+                <div>Enable the <strong>Pseudocode Panel</strong> (Code Panel button). Run DFS and observe which pseudocode line is highlighted at each step.</div>
+              </li>
+              <li>
+                <span class="dmsguide-tryit-step" style="background: var(--accent-purple);">3</span>
+                <div>Load the <em>BFS vs DFS Contrasting Graph</em>. Run both algorithms. Note how they explore in completely different orders.</div>
+              </li>
+              <li>
+                <span class="dmsguide-tryit-step" style="background: var(--accent-purple);">4</span>
+                <div>Enable <strong>Directed Graph</strong> mode. Add edges A→B, B→C, C→A. Run DFS — can it detect this cycle?</div>
+              </li>
+              <li>
+                <span class="dmsguide-tryit-step" style="background: var(--accent-purple);">5</span>
+                <div>Load the <em>Disconnected Graph</em>. Run DFS from A. Note that D and E are unreachable from A.</div>
+              </li>
+            </ul>
+            <div style="margin-top: 1rem;">
+              <button class="btn btn-purple btn-sm" onclick="app.navigateToTab('tab-visualizer')">
+                🚀 Open Graph Lab → Run DFS
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="dmsguide-callout dmsguide-callout-green" style="margin-top: 1.25rem;">
+          <div class="dmsguide-callout-icon" style="color: var(--accent-green);">📋</div>
+          <div>
+            <strong>Observation Template:</strong> For each task above, record in your Assignment Book:
+            <br>• <em>Graph type</em> (preset name) &nbsp;• <em>Start node</em> &nbsp;• <em>BFS order</em> &nbsp;• <em>DFS order</em> &nbsp;• <em>Queue/Stack states</em> &nbsp;• <em>Your observations</em> about how the algorithms differ.
+          </div>
+        </div>
+      </div>
+
+      <!-- ---- 9. ASSIGNMENT CHECKLIST ---- -->
+      <div class="card" id="dmsguide-sec-checklist">
+        <div class="card-header">
+          <h2 class="card-title">
+            <span class="card-title-icon">✅</span>
+            9. Assignment Completion Checklist
+          </h2>
+          <span class="badge badge-green">Assignment Book Guide</span>
+        </div>
+
+        <p>Use this checklist to ensure your DMS assignment is complete. Tick each item as you finish it. Your assignment book should contain all of the following sections.</p>
+
+        <div class="dmsguide-checklist-progress" id="checklist-progress-bar">
+          <div class="dmsguide-checklist-progress-fill" id="checklist-fill" style="width: 0%;"></div>
+        </div>
+        <div class="dmsguide-checklist-count" id="checklist-count">0 / 18 completed</div>
+
+        <div class="grid-2" style="margin-top: 1rem;">
+          <div>
+            <h4 style="color: var(--accent-cyan); margin-bottom: 0.75rem;">📋 Theory Section</h4>
+            <div class="dmsguide-checklist">
+              <label class="dmsguide-check-item"><input type="checkbox" class="dmsguide-checkbox" onchange="updateChecklist()"> <span>Written definition of Graph G = (V, E)</span></label>
+              <label class="dmsguide-check-item"><input type="checkbox" class="dmsguide-checkbox" onchange="updateChecklist()"> <span>Difference between directed and undirected graphs</span></label>
+              <label class="dmsguide-check-item"><input type="checkbox" class="dmsguide-checkbox" onchange="updateChecklist()"> <span>Drawn adjacency list and adjacency matrix for a sample graph</span></label>
+              <label class="dmsguide-check-item"><input type="checkbox" class="dmsguide-checkbox" onchange="updateChecklist()"> <span>BFS algorithm pseudocode written out</span></label>
+              <label class="dmsguide-check-item"><input type="checkbox" class="dmsguide-checkbox" onchange="updateChecklist()"> <span>DFS algorithm pseudocode (iterative and recursive) written out</span></label>
+              <label class="dmsguide-check-item"><input type="checkbox" class="dmsguide-checkbox" onchange="updateChecklist()"> <span>Time and space complexity analysis for both algorithms</span></label>
+            </div>
+
+            <h4 style="color: var(--accent-purple); margin-bottom: 0.75rem; margin-top: 1.25rem;">✏️ Worked Examples</h4>
+            <div class="dmsguide-checklist">
+              <label class="dmsguide-check-item"><input type="checkbox" class="dmsguide-checkbox" onchange="updateChecklist()"> <span>Step-by-step BFS trace on at least 2 different graphs</span></label>
+              <label class="dmsguide-check-item"><input type="checkbox" class="dmsguide-checkbox" onchange="updateChecklist()"> <span>Step-by-step DFS trace on at least 2 different graphs</span></label>
+              <label class="dmsguide-check-item"><input type="checkbox" class="dmsguide-checkbox" onchange="updateChecklist()"> <span>Observation table filled in (see Assignment tab)</span></label>
+            </div>
+          </div>
+
+          <div>
+            <h4 style="color: var(--accent-amber); margin-bottom: 0.75rem;">🔬 Interactive Lab</h4>
+            <div class="dmsguide-checklist">
+              <label class="dmsguide-check-item"><input type="checkbox" class="dmsguide-checkbox" onchange="updateChecklist()"> <span>Ran BFS on at least 3 different preset graphs in Graph Lab</span></label>
+              <label class="dmsguide-check-item"><input type="checkbox" class="dmsguide-checkbox" onchange="updateChecklist()"> <span>Ran DFS on at least 3 different preset graphs in Graph Lab</span></label>
+              <label class="dmsguide-check-item"><input type="checkbox" class="dmsguide-checkbox" onchange="updateChecklist()"> <span>Recorded BFS and DFS traversal orders in observation table</span></label>
+              <label class="dmsguide-check-item"><input type="checkbox" class="dmsguide-checkbox" onchange="updateChecklist()"> <span>Created and tested a custom graph with at least 6 nodes</span></label>
+            </div>
+
+            <h4 style="color: var(--accent-green); margin-bottom: 0.75rem; margin-top: 1.25rem;">📝 Exercises &amp; Analysis</h4>
+            <div class="dmsguide-checklist">
+              <label class="dmsguide-check-item"><input type="checkbox" class="dmsguide-checkbox" onchange="updateChecklist()"> <span>Answered practice exercises Q1 – Q6 with full solutions</span></label>
+              <label class="dmsguide-check-item"><input type="checkbox" class="dmsguide-checkbox" onchange="updateChecklist()"> <span>Written comparison table: BFS vs DFS (all properties)</span></label>
+              <label class="dmsguide-check-item"><input type="checkbox" class="dmsguide-checkbox" onchange="updateChecklist()"> <span>Stated 2 real-world applications each for BFS and DFS</span></label>
+              <label class="dmsguide-check-item"><input type="checkbox" class="dmsguide-checkbox" onchange="updateChecklist()"> <span>Written result/conclusion section in assignment book</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="dmsguide-callout dmsguide-callout-cyan" style="margin-top: 1.5rem;">
+          <div class="dmsguide-callout-icon">📖</div>
+          <div>
+            <strong>Assignment Book Instructions:</strong> Your assignment book should follow the standard format:
+            <em>Title → Aim → Theory → Algorithm → Worked Examples → Observation Table → Result/Conclusion → References.</em>
+            Use the <a href="#" onclick="app.navigateToTab('tab-observation'); return false;" style="color: var(--accent-cyan);">Assignment Report tab</a> to generate a printable observation sheet (PDF).
+          </div>
+        </div>
+      </div>
+
+      <!-- ---- 10. REFERENCES ---- -->
+      <div class="card" id="dmsguide-sec-refs">
+        <div class="card-header">
+          <h2 class="card-title">
+            <span class="card-title-icon">📖</span>
+            10. Academic References
+          </h2>
+          <span class="badge badge-purple">Citations</span>
+        </div>
+
+        <p>These are the standard academic references for BFS, DFS, and graph theory as covered in DMS courses. Cite appropriate references in your assignment book.</p>
+
+        <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 0.5rem;">
+
+          <div class="dmsguide-ref-card">
+            <div class="dmsguide-ref-num">[1]</div>
+            <div>
+              <div class="dmsguide-ref-title">Introduction to Algorithms (CLRS), 4th Edition</div>
+              <div class="dmsguide-ref-detail">Cormen, T.H., Leiserson, C.E., Rivest, R.L., &amp; Stein, C. (2022). MIT Press.</div>
+              <div class="dmsguide-ref-section">Chapter 22: Elementary Graph Algorithms — BFS (§22.2) &amp; DFS (§22.3)</div>
+            </div>
+          </div>
+
+          <div class="dmsguide-ref-card">
+            <div class="dmsguide-ref-num">[2]</div>
+            <div>
+              <div class="dmsguide-ref-title">Data Structures and Algorithms in Python</div>
+              <div class="dmsguide-ref-detail">Goodrich, M.T., Tamassia, R., &amp; Goldwasser, M.H. (2013). John Wiley &amp; Sons.</div>
+              <div class="dmsguide-ref-section">Chapter 14: Graph Algorithms — BFS, DFS, and their applications</div>
+            </div>
+          </div>
+
+          <div class="dmsguide-ref-card">
+            <div class="dmsguide-ref-num">[3]</div>
+            <div>
+              <div class="dmsguide-ref-title">Discrete Mathematics and Its Applications, 8th Edition</div>
+              <div class="dmsguide-ref-detail">Rosen, K.H. (2018). McGraw-Hill Education.</div>
+              <div class="dmsguide-ref-section">Chapter 10: Graphs — Graph Representations, Connectivity, and Traversals</div>
+            </div>
+          </div>
+
+          <div class="dmsguide-ref-card">
+            <div class="dmsguide-ref-num">[4]</div>
+            <div>
+              <div class="dmsguide-ref-title">Algorithm Design, 1st Edition</div>
+              <div class="dmsguide-ref-detail">Kleinberg, J. &amp; Tardos, É. (2005). Addison-Wesley.</div>
+              <div class="dmsguide-ref-section">Chapter 3: Graphs — BFS, DFS, Connectivity, Bipartiteness</div>
+            </div>
+          </div>
+
+          <div class="dmsguide-ref-card">
+            <div class="dmsguide-ref-num">[5]</div>
+            <div>
+              <div class="dmsguide-ref-title">Breadth-First Search (Original Paper)</div>
+              <div class="dmsguide-ref-detail">Moore, E.F. (1959). "The shortest path through a maze." Proc. Intl. Symp. Theory of Switching. Harvard University Press.</div>
+              <div class="dmsguide-ref-section">Original publication introducing BFS for shortest-path problems in graphs</div>
+            </div>
+          </div>
+
+          <div class="dmsguide-ref-card">
+            <div class="dmsguide-ref-num">[6]</div>
+            <div>
+              <div class="dmsguide-ref-title">GeeksforGeeks — BFS &amp; DFS Tutorials</div>
+              <div class="dmsguide-ref-detail">GeeksforGeeks. (2024). Available at: <em>https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/</em></div>
+              <div class="dmsguide-ref-section">Online interactive tutorials with code examples in C++, Java, Python</div>
+            </div>
+          </div>
+
+          <div class="dmsguide-ref-card">
+            <div class="dmsguide-ref-num">[7]</div>
+            <div>
+              <div class="dmsguide-ref-title">Lecture Notes on Graph Theory — DMS Course Material</div>
+              <div class="dmsguide-ref-detail">Department of Computer Science &amp; Engineering, 2nd Year DMS Course Notes (2024).</div>
+              <div class="dmsguide-ref-section">Unit 5: Graph Theory — Representations, BFS, DFS, Applications</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="dmsguide-callout dmsguide-callout-cyan" style="margin-top: 1.5rem;">
+          <div class="dmsguide-callout-icon">📌</div>
+          <div>
+            <strong>Citation Format:</strong> In your assignment book, cite references as:
+            [Author, Year, Book/Paper Title, Chapter/Section, Publisher]. For online resources, include URL and access date.
+          </div>
+        </div>
+      </div>
+
+    </section>
+
   </main>
 
   <!-- Toast Notification Floating Container -->
   <div id="toast-container"></div>
+
 
   <!-- JavaScript Modules -->
   <script src="js/graph.js"></script>

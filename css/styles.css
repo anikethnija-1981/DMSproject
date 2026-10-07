@@ -1460,3 +1460,633 @@ button, .quiz-option, .nav-tab {
 }
 
 
+/* ==========================================
+   16. DMS GUIDE SECTION — CUSTOM COMPONENTS
+   ========================================== */
+
+/* ---- Hero Card ---- */
+.dmsguide-hero-card {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(6, 182, 212, 0.08));
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
+.dmsguide-intro-bg {
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ---- Definition Cards ---- */
+.dmsguide-def-card {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.25rem;
+  transition: all 0.25s ease;
+}
+
+.dmsguide-def-card:hover {
+  border-color: var(--accent-cyan);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+.dmsguide-def-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+  font-family: 'JetBrains Mono', monospace;
+  border: 1px solid rgba(6,182,212,0.2);
+}
+
+/* ---- Callout Boxes ---- */
+.dmsguide-callout {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  background: rgba(6, 182, 212, 0.08);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.dmsguide-callout-cyan {
+  background: rgba(6, 182, 212, 0.08);
+  border-color: rgba(6, 182, 212, 0.35);
+}
+
+.dmsguide-callout-green {
+  background: rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+.dmsguide-callout-icon {
+  font-size: 1.4rem;
+  color: var(--accent-cyan);
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+/* ---- Pseudocode Blocks ---- */
+.dmsguide-pseudocode {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--accent-cyan);
+  border-radius: 12px;
+  padding: 0;
+  overflow: hidden;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.83rem;
+}
+
+.dmsguide-pseudo-title {
+  background: rgba(6, 182, 212, 0.12);
+  color: var(--accent-cyan);
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+.dmsguide-pseudocode pre {
+  margin: 0;
+  padding: 1rem;
+  border: none;
+  border-radius: 0;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  background: transparent;
+  color: var(--text-main);
+  white-space: pre-wrap;
+}
+
+/* ---- Property Rows ---- */
+.dmsguide-property-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 0.88rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+}
+
+.dmsguide-property-label {
+  white-space: nowrap;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+/* ---- App List ---- */
+.dmsguide-app-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  margin: 0;
+  padding: 0;
+}
+
+.dmsguide-app-list li {
+  padding: 0.5rem 0.75rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  transition: border-color 0.2s ease;
+}
+
+.dmsguide-app-list li:hover {
+  border-color: var(--accent-cyan);
+}
+
+/* ---- Example Blocks ---- */
+.dmsguide-example-block {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.dmsguide-example-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  background: rgba(6, 182, 212, 0.08);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.dmsguide-example-num {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: var(--accent-cyan);
+  color: #000;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+}
+
+/* ---- SVG Graph Display ---- */
+.dmsguide-graph-display {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 1.25rem 1.25rem 1.25rem;
+}
+
+/* ---- Step Trace Table ---- */
+.dmsguide-steps-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  font-family: 'JetBrains Mono', monospace;
+  margin: 0 1.25rem 1rem 1.25rem;
+}
+
+.dmsguide-step-row {
+  display: grid;
+  grid-template-columns: 40px 1fr 1fr 1fr;
+  gap: 0.5rem;
+  padding: 0.45rem 0.75rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  align-items: center;
+}
+
+.dmsguide-step-header {
+  background: rgba(6, 182, 212, 0.15);
+  border-color: var(--accent-cyan);
+  font-weight: 700;
+  color: var(--accent-cyan);
+}
+
+/* ---- Result Box ---- */
+.dmsguide-result-box {
+  margin: 0 1.25rem 1.25rem 1.25rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.dmsguide-result-cyan {
+  background: rgba(6, 182, 212, 0.12);
+  border: 1.5px solid var(--accent-cyan);
+  color: var(--accent-cyan);
+}
+
+.dmsguide-result-purple {
+  background: rgba(139, 92, 246, 0.12);
+  border: 1.5px solid var(--accent-purple);
+  color: var(--accent-purple);
+}
+
+/* ---- BFS Level Display ---- */
+.dmsguide-level-display {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0 0 1rem 0;
+  padding: 1rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.dmsguide-level-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.dmsguide-level-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.7rem;
+  border-radius: 9999px;
+  border: 1px solid;
+  white-space: nowrap;
+  flex-shrink: 0;
+  width: 70px;
+  text-align: center;
+}
+
+.dmsguide-level-nodes {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.dmsguide-node-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  border: 2px solid var(--accent-cyan);
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: var(--accent-cyan);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ---- Comparison Table ---- */
+.dmsguide-compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.dmsguide-compare-table thead tr {
+  background: var(--bg-primary);
+  border-bottom: 2px solid var(--border-color);
+}
+
+.dmsguide-compare-table th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.dmsguide-compare-table td {
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-muted);
+}
+
+.dmsguide-compare-table td:first-child {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.dmsguide-compare-table tbody tr:hover {
+  background: var(--bg-card-hover);
+}
+
+.dmsguide-compare-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ---- Activity Cards ---- */
+.dmsguide-activity-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.25s ease;
+}
+
+.dmsguide-activity-card:hover {
+  border-color: var(--accent-amber);
+}
+
+.dmsguide-activity-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  background: rgba(245, 158, 11, 0.08);
+  border-bottom: 1px solid var(--border-color);
+  flex-wrap: wrap;
+}
+
+.dmsguide-activity-num {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: var(--accent-amber);
+  color: #000;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+}
+
+.dmsguide-activity-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  flex: 1;
+}
+
+.dmsguide-activity-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.dmsguide-activity-answer {
+  margin-top: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--border-color);
+}
+
+/* ---- Exercise Cards ---- */
+.dmsguide-exercise-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.25rem;
+  transition: all 0.25s ease;
+}
+
+.dmsguide-exercise-card:hover {
+  border-color: var(--accent-rose);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+.dmsguide-ex-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.dmsguide-ex-num {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: var(--accent-rose);
+  color: #fff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+}
+
+/* ---- Try-It-Yourself Cards ---- */
+.dmsguide-tryit-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.25rem;
+  transition: all 0.25s ease;
+}
+
+.dmsguide-tryit-card:hover {
+  border-color: var(--accent-green);
+}
+
+.dmsguide-tryit-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.dmsguide-tryit-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0;
+  margin: 0;
+}
+
+.dmsguide-tryit-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 0.88rem;
+  padding: 0.6rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  transition: border-color 0.2s ease;
+}
+
+.dmsguide-tryit-list li:hover {
+  border-color: var(--accent-cyan);
+}
+
+.dmsguide-tryit-step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  min-width: 26px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  color: #000;
+  font-size: 0.78rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+/* ---- Checklist ---- */
+.dmsguide-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.dmsguide-check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 0.6rem 0.75rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.dmsguide-check-item:hover {
+  border-color: var(--accent-green);
+  background: var(--bg-card-hover);
+}
+
+.dmsguide-check-item:has(input:checked) {
+  border-color: var(--accent-green);
+  background: rgba(16, 185, 129, 0.06);
+}
+
+.dmsguide-check-item:has(input:checked) span {
+  text-decoration: line-through;
+  color: var(--text-subtle);
+}
+
+.dmsguide-checkbox {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  accent-color: var(--accent-green);
+  cursor: pointer;
+  margin-top: 1px;
+}
+
+.dmsguide-checklist-progress {
+  height: 10px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-bottom: 0.4rem;
+}
+
+.dmsguide-checklist-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan));
+  border-radius: 9999px;
+  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dmsguide-checklist-count {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  text-align: right;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* ---- References ---- */
+.dmsguide-ref-card {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1rem 1.25rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  transition: border-color 0.2s ease;
+}
+
+.dmsguide-ref-card:hover {
+  border-color: var(--accent-purple);
+}
+
+.dmsguide-ref-num {
+  font-size: 0.82rem;
+  font-weight: 800;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--accent-purple);
+  padding: 0.2rem 0.5rem;
+  background: rgba(139, 92, 246, 0.12);
+  border-radius: 6px;
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.dmsguide-ref-title {
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--text-main);
+  margin-bottom: 0.25rem;
+}
+
+.dmsguide-ref-detail {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.dmsguide-ref-section {
+  font-size: 0.8rem;
+  color: var(--accent-cyan);
+  font-weight: 600;
+  font-style: italic;
+}
+
+/* ---- Grid Utility ---- */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .dmsguide-step-row {
+    grid-template-columns: 30px 1fr;
+    gap: 0.3rem;
+  }
+  .dmsguide-step-row span:nth-child(3),
+  .dmsguide-step-row span:nth-child(4) {
+    grid-column: 2;
+  }
+  .dmsguide-activity-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+

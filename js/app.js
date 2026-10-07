@@ -374,7 +374,7 @@ class App {
     const barFill = document.getElementById('overall-progress-fill');
     const badgesEl = document.getElementById('badges-container');
 
-    if (topicsEl) topicsEl.innerText = `${this.progress.topicsVisited.size} / 8`;
+    if (topicsEl) topicsEl.innerText = `${this.progress.topicsVisited.size} / 9`;
     if (runsEl) runsEl.innerText = this.progress.traversalsRun.toString();
     if (quizzesEl) quizzesEl.innerText = this.progress.quizzesCompleted.toString();
 
@@ -1154,3 +1154,53 @@ document.addEventListener('DOMContentLoaded', () => {
   const app = new App();
   app.init();
 });
+
+// ==================================================
+// DMS GUIDE — CHECKLIST PROGRESS TRACKER
+// ==================================================
+function updateChecklist() {
+  const checkboxes = document.querySelectorAll('.dmsguide-checkbox');
+  const total = checkboxes.length;
+  const checked = Array.from(checkboxes).filter(c => c.checked).length;
+
+  const fill = document.getElementById('checklist-fill');
+  const count = document.getElementById('checklist-count');
+
+  if (fill) fill.style.width = total > 0 ? `${Math.round((checked / total) * 100)}%` : '0%';
+  if (count) count.textContent = `${checked} / ${total} completed`;
+
+  // Save checklist state to localStorage
+  try {
+    const state = Array.from(checkboxes).map(c => c.checked);
+    localStorage.setItem('dms_checklist_state', JSON.stringify(state));
+  } catch (e) {}
+}
+
+// Restore checklist state from localStorage
+document.addEventListener('DOMContentLoaded', () => {
+  try {
+    const saved = JSON.parse(localStorage.getItem('dms_checklist_state') || '[]');
+    const checkboxes = document.querySelectorAll('.dmsguide-checkbox');
+    checkboxes.forEach((cb, i) => {
+      if (saved[i] !== undefined) cb.checked = saved[i];
+    });
+    updateChecklist();
+  } catch (e) {}
+
+  // Smooth anchor scrolling support for DMS Guide internal links
+  document.querySelectorAll('a[href^="#dmsguide-"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href').slice(1);
+      const target = document.getElementById(targetId);
+      if (target) {
+        // Navigate to DMS Guide tab first
+        if (window.app) window.app.navigateToTab('tab-dmsguide');
+        setTimeout(() => {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    });
+  });
+});
+
