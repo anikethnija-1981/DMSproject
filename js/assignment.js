@@ -278,13 +278,90 @@ function loadTryitChallenge(idx) {
   if (hint) { hint.style.display = 'none'; hint.textContent = ''; }
 }
 
+function getValidTraversals(ch) {
+  const adj = {};
+  for (let key in ch.adjacency) {
+    adj[key.toUpperCase()] = ch.adjacency[key].map(v => v.toUpperCase());
+  }
+  const startVertex = ch.startVertex.toUpperCase();
+  const algo = ch.algorithm.toUpperCase();
+  const totalNodes = Object.keys(adj).length;
+
+  let results = [];
+
+  function getPermutations(arr) {
+    if (arr.length <= 1) return [arr];
+    let res = [];
+    for (let i = 0; i < arr.length; i++) {
+      let rest = [...arr.slice(0, i), ...arr.slice(i + 1)];
+      let restPerms = getPermutations(rest);
+      for (let rp of restPerms) {
+        res.push([arr[i], ...rp]);
+      }
+    }
+    return res;
+  }
+
+  if (algo === 'BFS') {
+    function generateBFS(queue, visited, currentPath) {
+      if (queue.length === 0) {
+        if (currentPath.length === totalNodes) results.push(currentPath.join(''));
+        return;
+      }
+      let u = queue.shift();
+      let unvisitedNeighbours = adj[u] ? adj[u].filter(v => !visited.has(v)) : [];
+      let perms = getPermutations(unvisitedNeighbours);
+      if (perms.length === 0) {
+        generateBFS([...queue], new Set(visited), [...currentPath]);
+      } else {
+        for (let p of perms) {
+          let newQueue = [...queue, ...p];
+          let newVisited = new Set(visited);
+          for (let v of p) newVisited.add(v);
+          generateBFS(newQueue, newVisited, [...currentPath, ...p]);
+        }
+      }
+    }
+    generateBFS([startVertex], new Set([startVertex]), [startVertex]);
+  } else if (algo === 'DFS') {
+    function generateDFS(path, visited, stack) {
+      if (path.length === totalNodes) {
+        results.push(path.join(''));
+        return;
+      }
+      if (stack.length === 0) return;
+      
+      let u = stack[stack.length - 1];
+      let unvisited = adj[u] ? adj[u].filter(v => !visited.has(v)) : [];
+      
+      if (unvisited.length === 0) {
+        let newStack = [...stack];
+        newStack.pop();
+        generateDFS(path, visited, newStack);
+      } else {
+        for (let v of unvisited) {
+          let newVisited = new Set(visited);
+          newVisited.add(v);
+          generateDFS([...path, v], newVisited, [...stack, v]);
+        }
+      }
+    }
+    generateDFS([startVertex], new Set([startVertex]), [startVertex]);
+  }
+
+  if (results.length === 0) {
+    results.push(ch.answer.map(s => s.toUpperCase()).join(''));
+  }
+  
+  return Array.from(new Set(results));
+}
+
 function checkTryitAnswer() {
   const ch = tryitChallenges[currentTryitIdx];
   const input = document.getElementById('tryit-input');
   const resultEl = document.getElementById('tryit-result');
   if (!input || !resultEl || !ch) return;
 
-  // Parse user answer
   const userRaw = input.value.trim();
   if (!userRaw) {
     showToast('Please enter your predicted traversal order first!', 'warning');
@@ -292,10 +369,35 @@ function checkTryitAnswer() {
   }
 
   const userAns = userRaw.split(/[\s,→\-]+/).map(s => s.trim().toUpperCase()).filter(Boolean);
-  const correctAns = ch.answer.map(s => s.toUpperCase());
+  const userAnsJoined = userAns.join('');
+  const validTraversals = getValidTraversals(ch);
+  const totalNodes = Object.keys(ch.adjacency).length;
 
-  const isCorrect = userAns.length === correctAns.length &&
-    userAns.every((v, i) => v === correctAns[i]);
+  const isCorrect = validTraversals.includes(userAnsJoined) && userAns.length === totalNodes;
+  
+  let isPartiallyCorrect = false;
+  let maxMatched = 0;
+  let bestMatchStr = validTraversals[0];
+
+  if (!isCorrect) {
+    for (let valid of validTraversals) {
+      let matchCount = 0;
+      for (let i = 0; i < Math.min(userAnsJoined.length, valid.length); i++) {
+        if (userAnsJoined[i] === valid[i]) {
+          matchCount++;
+        } else {
+          break;
+        }
+      }
+      if (matchCount > maxMatched) {
+        maxMatched = matchCount;
+        bestMatchStr = valid;
+      }
+    }
+    if (maxMatched > 0 && maxMatched < totalNodes) {
+      isPartiallyCorrect = true;
+    }
+  }
 
   resultEl.style.display = 'block';
 
@@ -303,16 +405,29 @@ function checkTryitAnswer() {
     resultEl.innerHTML = `
       <div class="tryit-result-correct">
         ✅ Correct! Well done!<br>
-        <span style="font-family:'JetBrains Mono',monospace;">Order: ${correctAns.join(' → ')}</span><br>
+        <span style="font-family:'JetBrains Mono',monospace;">Order: ${userAns.join(' → ')}</span><br>
         <div style="margin-top:0.6rem;font-size:0.85rem;font-weight:400;color:var(--accent-green);">${ch.explanation}</div>
       </div>`;
     showToast('Correct! 🎉 Great understanding!', 'success');
+  } else if (isPartiallyCorrect) {
+    const partialAns = userAnsJoined.substring(0, maxMatched).split('');
+    const bestAns = bestMatchStr.split('');
+    resultEl.innerHTML = `
+      <div class="tryit-result-incorrect" style="border-left-color: var(--accent-cyan); background: rgba(6, 182, 212, 0.05);">
+        <div class="tryit-wrong" style="color: var(--accent-cyan);">⚠️ Partially Correct!</div>
+        <div style="margin-bottom:0.4rem;font-size:0.88rem;">Your sequence starts correctly: <span style="font-family:'JetBrains Mono',monospace; color: var(--accent-cyan);">${partialAns.join(' → ')}</span></div>
+        <div style="margin-bottom:0.4rem;font-size:0.88rem;">But then diverges. Keep going!</div>
+        <div class="tryit-correct-ans" style="opacity: 0.7;">Possible correct: ${bestAns.join(' → ')}</div>
+        <div style="margin-top:0.75rem;font-size:0.85rem;color:var(--text-muted);">${ch.explanation}</div>
+      </div>`;
+    showToast('You are on the right track!', 'info');
   } else {
+    const bestAns = bestMatchStr.split('');
     resultEl.innerHTML = `
       <div class="tryit-result-incorrect">
         <div class="tryit-wrong">❌ Not quite right. Keep trying!</div>
-        <div style="margin-bottom:0.4rem;font-size:0.88rem;">Your answer: <span style="font-family:'JetBrains Mono',monospace;">${userAns.join(' → ')}</span></div>
-        <div class="tryit-correct-ans">✓ Correct: ${correctAns.join(' → ')}</div>
+        <div style="margin-bottom:0.4rem;font-size:0.88rem;">Your answer: <span style="font-family:'JetBrains Mono',monospace;">${userAns.join(' → ') || '(empty or invalid)'}</span></div>
+        <div class="tryit-correct-ans">✓ Correct: ${bestAns.join(' → ')}</div>
         <div style="margin-top:0.75rem;font-size:0.85rem;color:var(--text-muted);">${ch.explanation}</div>
       </div>`;
     showToast('Not quite — the explanation is shown below.', 'error');
